@@ -3,6 +3,14 @@ Workshop tool for recording tournaments and exporting them as data
 
 Import code: 66VH8
 
+-------
+
+SPECIAL THANKS TO ZEZOMBYE FOR [OVERPY](https://github.com/Zezombye/overpy)
+I use overpy's decompiler to extract the data. Without it this project would have been a *huge* pain in the ass.
+
+
+
+
 EVENTS: One array deep is the round. The next array deep is chunks of 50 events  
 There are 5 arrays inside of each chunk; each array is 50 long  
 The first array is timestamps; second is type (an enum, next post will have that), 3rd is the name of the attacker/healer, 4th is the name of the victim/healee, 5th is the associated value (the damage amount, the healing amount, or the direction of knockback)  
