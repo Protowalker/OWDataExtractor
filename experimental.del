@@ -1,0 +1,186 @@
+import "helper.del";
+//import "debug.del";
+
+enum Ability {
+    Ability1 = 1,
+    Ability2 = 2,
+    PrimaryFire = 4,
+    SecondaryFire = 8,
+    Melee = 16,
+    Ultimate = 32
+}
+
+playervar define currentRoundData = [];
+playervar define dataIndex = 0;
+
+
+//Current Round Events
+
+globalvar define CRE_timestamp = [];
+
+globalvar define CRE_type = [];
+globalvar define CRE_aName = [];
+globalvar define CRE_vName = [];
+globalvar define CRE_value = [];
+
+
+globalvar define eventIndex = 0;
+
+
+globalvar define timer = 0;
+
+define Millis: timer%1;
+
+rule: "Setup"
+{
+    ChaseVariableAtRate(timer, 999999999, 1, RateChaseReevaluation.DestinationAndRate);
+    DisableInspectorRecording();
+    CRE_type[0] = [];
+    CRE_aName[0] = [];
+    CRE_vName[0] = [];
+    CRE_value[0] = [];
+}
+
+rule: "Player Setup"
+Event.OngoingPlayer
+{
+
+}
+
+enum EventType {
+    Damage,
+    Healing,
+    FinalBlow,
+    Knockback
+}
+
+
+define Name(define player): <"<0>", player>;
+
+rule: "Player Takes Damage"
+Event.OnDamageTaken 
+if(IsGameInProgress()){
+    //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker()));
+    //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
+
+    AppendToEvents(EventType.Damage, Attacker(), Victim(), EventDamage());
+}
+
+rule: "Player Receives Healing"
+Event.OnHealingTaken 
+if(IsGameInProgress()){
+    //Healer().currentRoundData = Append(currentRoundData, getPlayerData(Healer()));
+    //Healee().currentRoundData = Append(currentRoundData, getPlayerData(Healee()));
+
+    AppendToEvents(EventType.Healing, Healer(), Healee(), EventHealing());
+}
+
+rule: "Player Dies"
+Event.OnFinalBlow
+if(IsGameInProgress()) {
+    //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
+    //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
+    AppendToEvents(EventType.FinalBlow, Attacker(), Victim(), EventDamage());
+}
+
+rule: "Player Takes Knockback"
+Event.PlayerDealtKnockback
+if(IsGameInProgress())
+ {
+    //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
+    //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
+    AppendToEvents(EventType.Knockback, Attacker(), Victim(), EventDirection());
+}
+
+rule: "Get data once every 5 seconds otherwise"
+Event.OngoingPlayer
+if(IsGameInProgress()){
+    AppendToData(EventPlayer, getPlayerData(EventPlayer));
+    Wait(5);
+    LoopIfConditionIsTrue();
+}
+
+void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref define value){
+    if(eventIndex >= 50){
+        define round = MatchRound() - 1;
+        if(events[round] == 0){
+            events[round] = [];
+        }
+        events[round] = Append(events[round], [CRE_timestamp, CRE_type, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
+        CRE_timestamp = [];
+        CRE_type = [];
+        CRE_aName = [];
+        CRE_vName = [];
+        CRE_value = [];
+        eventIndex = 0;
+    }
+    CRE_timestamp[eventIndex] = (TotalTimeElapsed() + Millis);
+    CRE_type[eventIndex] = type;
+    CRE_aName[eventIndex] = aName;
+    CRE_vName[eventIndex] = vName;
+    CRE_value[eventIndex] = value;
+    eventIndex++;
+}
+
+define GlobalPlayerSlot(define player): SlotOf(player) + (TeamOf(player)==Team.Team2)?6:0;
+
+void AppendToData(define player, define value){
+    if(player.dataIndex >= 50){
+        define currentRound = MatchRound() - 1;
+        if(data[currentRound] == 0) {
+            data[currentRound] = [];
+        }
+        
+        data[currentRound][GlobalPlayerSlot(player)] = Append(data[currentRound][GlobalPlayerSlot(player)], player.currentRoundData);
+        player.currentRoundData = [];
+        player.dataIndex = 0;
+    }
+    player.currentRoundData[player.dataIndex] = value;
+    player.dataIndex++;
+}
+
+
+globalvar define data = [];
+globalvar define events = [];
+
+rule: "Round complete, store final data"
+if(IsBetweenRounds() ||IsMatchComplete()){
+    define round = MatchRound() - 1;
+    events[round] = Append(events[round], [CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
+    CRE_timestamp = [];
+    CRE_type = [];
+    CRE_aName = [];
+    CRE_vName = [];
+    CRE_value = [];
+    eventIndex = 0;
+    MinWait();
+
+    if(IsMatchComplete())
+        EnableInspectorRecording();
+}
+
+define getPlayerData(define player) {
+
+    define abilityFlags = 0;
+
+    abilityFlags += IsUsingAbility1()*Ability.Ability1;
+    abilityFlags += IsUsingAbility2()*Ability.Ability2;
+    abilityFlags += IsFiringPrimary()*Ability.PrimaryFire;
+    abilityFlags += IsFiringSecondary()*Ability.SecondaryFire;
+    abilityFlags += IsMeleeing()*Ability.Melee;
+    abilityFlags += IsUsingUltimate()*Ability.Ultimate;
+
+
+    return [
+        MatchTime() + Millis,
+        EP_Alive,
+        EP_Position,
+        EP_Direction,
+        EP_Health,
+        EP_Velocity,
+        abilityFlags
+    ];
+}
+
+
+

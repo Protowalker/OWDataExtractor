@@ -1,0 +1,21 @@
+define EventPlayer: EventPlayer();
+
+define EP_Position: PositionOf(EventPlayer);
+define EP_EyePosition: EyePosition(EventPlayer);
+define EP_Direction: FacingDirectionOf(EventPlayer);
+
+define EP_Hero: HeroOf(EventPlayer);
+define EP_Health: Health(EventPlayer);
+
+define EP_Velocity: VelocityOf(EventPlayer);
+define EP_Alive: IsAlive(EventPlayer);
+
+
+
+define TICK_LENGTH: 1/62.5;
+
+define WaitTicks(define tickCount): Wait(tickCount*TICK_LENGTH);
+
+
+
+define ArrayIndex: CurrentArrayIndex();

@@ -1,0 +1,146 @@
+// import "helper.del";
+// import "debug.del";
+
+// enum Ability {
+//     Ability1 = 1,
+//     Ability2 = 2,
+//     PrimaryFire = 4,
+//     SecondaryFire = 8,
+//     Melee = 16,
+//     Ultimate = 32
+// }
+
+
+// struct PlayerData {
+//     public Vector position;
+//     public Vector facingDirection;
+
+//     public Hero hero;
+
+//     public define abilityFlag = 0; 
+
+//     public define isAlive = false;
+
+//     public define health;
+// }
+
+
+// //structure: data[0][0] is player data for the first player on team 1 for round 1
+
+
+
+
+// rule: "Performance enhancements"
+// Event.OngoingPlayer
+// if(IsInSetup()){
+//     currentRound_alives[999] = 0;
+//     currentRound_positions[999] = 0;
+//     currentRound_directions[999] = 0;
+//     currentRound_heroes[999] = 0;
+//     currentRound_healths[999] = 0;
+//     currentRound_abilityFlags[999] = 0;
+    
+//     Wait(SlotOf(EventPlayer())/3);
+
+//     currentRound_alives = MappedArray(currentRound_alives, true);
+//     currentRound_positions = MappedArray(currentRound_alives, Vector());
+//     currentRound_directions = MappedArray(currentRound_alives, Vector());
+//     currentRound_heroes = MappedArray(currentRound_alives, Hero.Ana);
+
+// }
+
+// playervar define currentRound_alives = [];
+// playervar define currentRound_positions = [];
+// playervar define currentRound_directions = [];
+// playervar define currentRound_heroes = [];
+// playervar define currentRound_healths = [];
+// playervar define currentRound_abilityFlags = [];
+
+
+// rule: "Loop for every player once every x ticks"
+// Event.OngoingPlayer
+// if(IsGameInProgress())
+// {
+//     define saveTick = 0;
+
+//     define isAlive = IsAlive(EventPlayer);
+//     define abilityFlag = 0;
+
+//     currentRound_alives[saveTick] = isAlive;
+//     if(isAlive) {
+//         currentRound_positions[saveTick] = EP_Position;
+//         currentRound_directions[saveTick] = EP_Direction;
+
+//         currentRound_heroes[saveTick] = EP_Hero;
+//         currentRound_healths[saveTick] = EP_Health;
+    
+//         abilityFlag += IsUsingAbility1()*Ability.Ability1;
+//         abilityFlag += IsUsingAbility2()*Ability.Ability2;
+//         abilityFlag += IsFiringPrimary()*Ability.PrimaryFire;
+//         abilityFlag += IsFiringSecondary()*Ability.SecondaryFire;
+//         abilityFlag += IsMeleeing()*Ability.Melee;
+//         abilityFlag += IsUsingUltimate()*Ability.Ultimate;
+//         currentRound_abilityFlags[saveTick] = abilityFlag;
+
+//     }
+//     WaitTicks(6);
+    
+//     saveTick++;
+//     LoopIfConditionIsTrue();
+// }
+
+// globalvar define data_alive = [];
+// globalvar define data_position = [];
+// globalvar define data_direction = [];
+// globalvar define data_hero = [];
+// globalvar define data_health = [];
+
+// globalvar define data_abilityFlag = [];
+
+
+
+// rule: "Consolidate data at end of round"
+// Event.OngoingPlayer 
+// if(IsBetweenRounds() || IsMatchComplete())
+// {
+//     define currentRound = MatchRound() - 1;
+//     define playersArray = AllPlayers();
+//     define playersArrayCount = CountOf(playersArray);
+
+//     define p_i = SlotOf(EventPlayer()) + (TeamOf(EventPlayer()) == Team.Team2 ? 6 : 0);
+
+//     if(p_i == 0) {
+//         data_alive[currentRound] = [];
+//         data_position[currentRound] = [];
+//         data_direction[currentRound] = [];
+//         data_health[currentRound] = [];
+//         data_hero[currentRound] = [];
+//         data_abilityFlag[currentRound] = [];
+//     }
+//     else WaitTicks(2);
+
+//     data_alive[currentRound] = [];
+//     data_position[currentRound] = [];
+//     data_direction[currentRound] = [];
+//     data_health[currentRound] = [];
+//     data_hero[currentRound] = [];
+//     data_abilityFlag[currentRound] = [];
+    
+//     define tickCount = CountOf(EventPlayer.currentRound_alives);
+//     for(define j! = 0; j < tickCount; j++){
+//         define isAlive = EventPlayer.currentRound_alives[j];
+//         if(!isAlive){
+//             data_alive[currentRound][p_i] = false;
+//             continue;
+//         }
+
+//         data_position[currentRound][p_i] = EventPlayer.currentRound_positions[j];
+//         data_direction[currentRound][p_i] = EventPlayer.currentRound_directions[j];
+//         data_hero[currentRound][p_i] = EventPlayer.currentRound_heroes[j];
+//         data_abilityFlag[currentRound][p_i] = EventPlayer.currentRound_abilityFlags[j];
+//         data_alive[currentRound][p_i] = isAlive;
+//         data_health[currentRound][p_i] = EventPlayer.currentRound_healths[j];
+
+//         if(j%7 == 0) MinWait();
+//     }
+// }

@@ -1,0 +1,29 @@
+rule: "[Debug] show load"
+Event.OngoingGlobal
+{
+    CreateHudText(AllPlayers(), <"SL: <0>\nSLA: <1>\nSLP: <2>", ServerLoad(), ServerLoadAverage(), ServerLoadPeak()>);
+}
+
+rule: "[Debug] skip assembling heroes"
+Event.OngoingGlobal
+if(IsAssemblingHeroes())
+{
+    SetMatchTime(0);
+}
+
+rule: "[Debug] match time 0"
+Event.OngoingGlobal
+if(IsButtonHeld(HostPlayer(), Button.Interact))
+{
+    SetMatchTime(0);
+}
+
+rule: "[Debug] spawn dummy bots"
+Event.OngoingGlobal
+if(IsButtonHeld(HostPlayer(), Button.Crouch))
+if(IsButtonHeld(HostPlayer(), Button.Melee))
+{
+    while(CountOf(AllPlayers()) < 12)
+        CreateDummyBot(RandomValueInArray(AllHeroes()), FilteredArray([Team.Team1, Team.Team2], CountOf(AllPlayers(ArrayElement())) < 6), -1, PositionOf(HostPlayer()));
+        Wait(1);
+}
