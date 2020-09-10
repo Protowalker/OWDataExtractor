@@ -6,8 +6,10 @@ Import code: 66VH8
 EVENTS: One array deep is the round. The next array deep is chunks of 50 events  
 There are 5 arrays inside of each chunk; each array is 50 long  
 The first array is timestamps; second is type (an enum, next post will have that), 3rd is the name of the attacker/healer, 4th is the name of the victim/healee, 5th is the associated value (the damage amount, the healing amount, or the direction of knockback)  
-For the type, 0 = Damage, 1 = Healing, 2 = Final Blow, 3 = Knockback  
+For the type, 0 = Damage, 1 = Healing, 2 = Final Blow, 3 = Knockback 
+
 --------
+
 DATA: One array deep is the round. Two arrays is the player. Next is chunks of 50 pieces of data  
 Each chunk is made up of 50 elements, each one representing a single timestamp  
 0: MatchTime() + Millis,  
