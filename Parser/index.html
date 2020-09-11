@@ -9,29 +9,34 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" href="style.css" />
 
+    <!-- <link rel="stylesheet" href="syntax/prism.css" />
+    <script src="syntax/prism.js"></script> -->
+
     <script src="overpy.js"></script>
     <script src="main.js"></script>
 </head>
 
 <body>
-    <div class="uk-section uk-section-primary uk-box-shadow-large">
-        <h1 class="uk-heading-medium uk-text-center">Overwatch TourneyData Exporter</h1>
-    </div>
+    <div id="mainContainer" class="uk-container uk-container-expand uk-padding-remove">
+        <div class="uk-section uk-section-primary uk-box-shadow-large">
+            <h1 class="uk-heading-medium uk-text-center">Overwatch TourneyData Exporter</h1>
+        </div>
 
-    <div class="uk-section uk-section-secondary">
-        <div class="uk-container">
-            <div class="uk-align-center uk-width-1-1 uk-padding-small">
-                <textarea class="uk-textarea uk-overflow-auto uk-height-large" id="variables" placeholder="Input Data from Overwatch.."></textarea>
-                <button class="uk-button uk-button-primary uk-margin" onclick="parseInput()">Convert Data</button>
+        <div class="uk-section uk-section-secondary">
+            <div class="uk-container">
+                <div class="uk-align-center uk-width-1-1 uk-padding-small">
+                    <textarea class="haskell uk-textarea uk-overflow-auto uk-height-large" id="variables" placeholder="Input Data from Overwatch.."></textarea>
+                    <button id="parseButton" class="uk-button uk-button-primary uk-margin" onclick="parseInput()">Convert Data</button>
+                </div>
+            </div>
+            <hr class="uk-divider-icon" />
+            <div class="uk-container">
+                <div class="uk-align-center uk-width-1-1 uk-padding-small">
+                    <textarea class="uk-textarea uk-overflow-auto uk-height-large" id="output" placeholder="Your data will appear here..." readonly></textarea>
+                </div>
             </div>
         </div>
-        <hr class="uk-divider-icon" />
-        <div class="uk-container">
-            <div class="uk-align-center uk-width-1-1 uk-padding-small">
-                <textarea class="uk-textarea uk-overflow-auto uk-height-large" id="output" placeholder="Your data will appear here..." readonly></textarea>
-            </div>
-        </div>
-    </div>
 
-    <footer class="uk-section-primary">Special thanks to Zezombye for creating <a style="color: lightskyblue" href="https://github.com/Zezombye/overpy">Overpy</a></footer>
+        <footer class="uk-section-primary">Special thanks to Zezombye for creating <a style="color: lightskyblue" href="https://github.com/Zezombye/overpy">Overpy</a></footer>
+    </div>
 </body>

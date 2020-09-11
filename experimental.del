@@ -63,10 +63,14 @@ rule: "Setup"
     CRE_value[0] = [];
 }
 
-rule: "Player Setup"
-Event.OngoingPlayer
-{
 
+globalvar define roundTimestamps = [];
+
+rule: "Track per-round data"
+Event.OngoingGlobal
+if(IsGameInProgress())
+{
+    roundTimestamps[MatchRound() - 1] = TotalTimeElapsed();
 }
 
 enum EventType {
@@ -126,6 +130,8 @@ if(IsGameInProgress()){
     LoopIfConditionIsTrue();
 }
 
+
+
 void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref define value){
     if(eventIndex >= 50){
         define round = MatchRound() - 1;
@@ -141,7 +147,8 @@ void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref 
         CRE_value = [];
         eventIndex = 0;
     }
-    CRE_timestamp[eventIndex] = (TotalTimeElapsed() + Millis);
+    
+    CRE_timestamp[eventIndex] = TotalTimeElapsed() + Millis;
     CRE_type[eventIndex] = type;
     CRE_aName[eventIndex] = aName;
     CRE_vName[eventIndex] = vName;
@@ -186,6 +193,8 @@ if(IsBetweenRounds() ||IsMatchComplete()){
     MinWait();
 
     if(IsMatchComplete()){
+        //GlobalVariable();
+
         activeDataPieces = [collectIsAliveData,
                             collectPositionData,
                             collectFacingData,

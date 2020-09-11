@@ -27,47 +27,127 @@ var vectRegex = _wrapRegExp(/vect\((.*?)\)/g, {
 });
 
 function parseInput() {
-  var script = document.getElementById("variables").value;
-  var actionStart = script.indexOf("actions");
-  console.log(actionStart);
-  script = script.slice(0, actionStart) + 'rule("fake rule") {\n' + script.slice(actionStart);
-  script += '}';
-  var output = overpy.decompileAllRules(script);
-  var ruleStart = output.indexOf("rule");
-  var rule = output.slice(ruleStart);
-  var dataIndex = rule.indexOf("data");
-  var data = rule.slice(dataIndex);
-  var dataEnd = data.indexOf('\n');
-  var data = data.slice(0, dataEnd);
-  var dataArray = data.indexOf('=') + 1;
-  var dataArray = data.slice(dataArray);
-  var dataJson = '{"data": ' + dataArray + '}';
-  var dataJson = dataJson.replace(vectRegex, '[$<entries>]');
-  var events = rule.indexOf("events");
-  var events = rule.slice(events);
-  var eventsEnd = events.indexOf('\n');
-  var events = events.slice(0, eventsEnd);
-  var eventsArray = events.indexOf('=') + 1;
-  var eventsArray = events.slice(eventsArray);
-  var eventsJson = '{"events": ' + eventsArray + '}';
-  var eventsJson = eventsJson.replace(vectRegex, '[$<entries>]');
-  var data = JSON.parse(dataJson).data;
-  var events = JSON.parse(eventsJson).events;
-  console.log(events);
+  var overpy_output;
+  removeError();
+
+  try {
+    var script = document.getElementById("variables").value;
+    var actionStart = script.indexOf("actions");
+    script = script.slice(0, actionStart) + 'rule("fake rule") {\n' + script.slice(actionStart);
+    script += '}';
+    overpy_output = overpy.decompileAllRules(script);
+    var event_position = overpy_output.indexOf("@Event undefined");
+    var the_rest = overpy_output.slice(event_position).trim();
+
+    if (the_rest == "") {
+      throw null;
+    }
+  } catch (e) {
+    console.log(e);
+    createErrorAlert("Invalid script. Make sure you're pressing the button labeled <span class='uk-label'>(x)</span> in the inspector.");
+    return;
+  }
+
+  var ruleStart = overpy_output.indexOf("rule");
+  var rule = overpy_output.slice(ruleStart);
+
+  try {
+    var data = getVariableFromOpy(rule, "data");
+    var events = getVariableFromOpy(rule, "events");
+    var activeDataPieces = getVariableFromOpy(rule, "activeDataPieces");
+    var roundTimestamps = getVariableFromOpy(rule, "roundTimestamps");
+  } catch (e) {
+    createErrorAlert(e);
+  } // {
+  //  rounds:[] {   
+  //         events: {
+  //         damage: [],
+  //         healing: [],
+  //         finalBlows: [],
+  //         knockback: []
+  //     }
+  //    }
+  // }
+
+
+  var rounds = [];
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
     for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      round = _step.value;
+      var round = _step.value;
+      var roundOutput = {
+        events: {
+          damage: [],
+          healing: [],
+          finalBlows: [],
+          knockback: []
+        }
+      };
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
 
       try {
         for (var _iterator2 = round[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          chunk = _step2.value;
+          var chunk = _step2.value;
+          var count = chunk[0].length;
+
+          for (var i = 0; i < count; i++) {
+            var type = chunk[0][i];
+            var timestamp = chunk[1][i];
+            var attacker_name = chunk[2][i];
+            var victim_name = chunk[3][i];
+            var value = chunk[4][i];
+
+            switch (type) {
+              case 0:
+                //Damage
+                var event = {
+                  timestamp: timestamp,
+                  attacker: attacker_name,
+                  victim: victim_name,
+                  amount: value
+                };
+                roundOutput.events.damage.push(event);
+                break;
+
+              case 1:
+                //Healing
+                var event = {
+                  timestamp: timestamp,
+                  healer: attacker_name,
+                  healee: victim_name,
+                  amount: value
+                };
+                roundOutput.events.healing.push(event);
+                break;
+
+              case 2:
+                //Final Blow
+                var event = {
+                  timestamp: timestamp,
+                  attacker: attacker_name,
+                  victim: victim_name,
+                  amount: value
+                };
+                roundOutput.events.finalBlows.push(event);
+                break;
+
+              case 3:
+                //knockback
+                var event = {
+                  timestamp: timestamp,
+                  attacker: attacker_name,
+                  victim: victim_name,
+                  direction_xyz: value
+                };
+                roundOutput.events.knockback.push(event);
+                break;
+            }
+          }
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -84,12 +164,7 @@ function parseInput() {
         }
       }
 
-      var count = round.length();
-
-      for (var i = 0; i < count; i++) {
-        var type = round[0][i];
-        var timestamp = round[1][i];
-      }
+      rounds.push(roundOutput);
     }
   } catch (err) {
     _didIteratorError = true;
@@ -105,8 +180,49 @@ function parseInput() {
       }
     }
   }
+
+  var output = {};
+  output.rounds = rounds;
+  output.roundTimestamps = roundTimestamps;
+  var element = document.getElementById("output");
+  element.value = JSON.stringify(output);
+  Prism.highlightAll();
 }
 
-String.prototype.splice = function (idx, rem, str) {
-  return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
-};
+function getVariableFromOpy(script, variableName) {
+  var index = script.indexOf(variableName);
+  var data = script.slice(index);
+  var dataEnd = data.indexOf('\n');
+  var data = data.slice(0, dataEnd);
+  var dataArray = data.indexOf('=') + 1;
+  var dataArray = data.slice(dataArray);
+  var dataJson = '{"' + variableName + '": ' + dataArray + '}';
+  var dataJson = dataJson.replace(vectRegex, '[$<entries>]');
+  console.log(dataJson);
+  return JSON.parse(dataJson)[variableName];
+}
+
+function createErrorAlert(errorMessage) {
+  var button = document.getElementById('parseButton');
+  button.classList.remove("uk-button-primary");
+  button.classList.add("uk-button-danger");
+  var alert = document.createElement("div");
+  alert.innerHTML = "<div id=\"errorAlert\" style=\"background: #A60000; color:white\" uk-alert> \n                            <a class=\"uk-alert-close\" uk-close></a> \n                            <p> " + errorMessage + "</p>\n                        </div> ";
+  button.after(alert.firstChild);
+  setTimeout(removeError, 5000);
+}
+
+function removeError() {
+  var button = document.getElementById('parseButton');
+
+  try {
+    button.classList.add("uk-button-primary");
+    button.classList.remove("uk-button-danger");
+  } catch (_unused) {}
+
+  var alert = document.getElementById("errorAlert");
+
+  if (alert !== null) {
+    UIkit.alert(alert).close();
+  }
+}
