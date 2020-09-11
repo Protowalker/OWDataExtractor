@@ -1,0 +1,139 @@
+{
+    "name": "overpy",
+    "publisher": "Zezombye",
+    "displayName": "OverPy",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Zezombye/overpy"
+    },
+    "description": "High-level language for the Overwatch Workshop, with decompilation and compilation.",
+    "version": "6.2.3",
+    "readme": "README.md",
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "icon": "img/overpy.png",
+    "keywords": [
+        "overpy",
+        "overwatch",
+        "workshop",
+        "ow",
+        "owws"
+    ],
+    "main": "./extension.js",
+    "activationEvents": [
+        "onLanguage:overpy",
+        "onCommand:extension.decompile"
+    ],
+    "categories": [
+        "Programming Languages"
+    ],
+    "dependencies": {
+        "copy-paste": "^1.3.0"
+    },
+    "contributes": {
+        "configuration": {
+            "title": "OverPy",
+            "properties": {
+                "overpy.workshopLanguage": {
+                    "type": "string",
+                    "description": "Specifies the language used for decompilation and compilation.",
+                    "default": "en-US",
+                    "enum": [
+                        "de-DE",
+                        "en-US",
+                        "es-ES",
+                        "es-MX",
+                        "fr-FR",
+                        "it-IT",
+                        "ja-JP",
+                        "ko-KR",
+                        "pl-PL",
+                        "pt-BR",
+                        "ru-RU",
+                        "zh-CN",
+                        "zh-TW"
+                    ],
+                    "enumDescriptions": [
+                        "German",
+                        "English",
+                        "Spanish (Spain)",
+                        "Spanish (Mexico)",
+                        "French",
+                        "Italian",
+                        "Japanese",
+                        "Korean",
+                        "Polish",
+                        "Portugese (Brazil)",
+                        "Russian",
+                        "Chinese (Simplified)",
+                        "Chinese (Traditional)"
+                    ]
+                },
+                "overpy.compileOnSave": {
+                    "type": "boolean",
+                    "description": "Specifies whether to initiate a compilation on save.",
+                    "default": true
+                },
+                "overpy.onlySaveOnMainFile": {
+                    "type": "boolean",
+                    "description": "If \"Compile on save\" is enabled, only saves if the file is the main file (defined as not having a `#!mainFile` directive).",
+                    "default": false
+                },
+                "overpy.addTemplateOnNewFile": {
+                    "type": "boolean",
+                    "description": "Specifies whether to add a template when a new OverPy file is created. Warning: due to a bug (#196), the template will be inserted when a new file is saved to disk (as .opy file) for the first time.",
+                    "default": false
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "overpy",
+                "aliases": [
+                    "OverPy",
+                    "overpy"
+                ],
+                "extensions": [
+                    ".opy"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "overpy",
+                "scopeName": "source.opy",
+                "path": "./syntaxes/overpy.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.compile",
+                "title": "Compile (OverPy -> Workshop)",
+                "category": "OverPy",
+                "icon": {
+                    "light": "/img/index.svg",
+                    "dark": "/img/index.svg"
+                }
+            },{
+                "command": "extension.decompile",
+                "title": "Decompile (Workshop -> OverPy)",
+                "category": "OverPy",
+                "icon": {
+                    "light": "/img/index.svg",
+                    "dark": "/img/index.svg"
+                }
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "when": "resourceLangId == overpy",
+                    "command": "extension.compile",
+                    "group": "navigation@6"
+                }
+            ]
+        }
+    }
+}

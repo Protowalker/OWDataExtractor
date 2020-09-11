@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <head>
-    <script src="main.js"></script>
     <title>Overwatch TourneyData Exporter</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+
+    <script src="overpy.js"></script>
+    <script src="main.js"></script>
 </head>
 
 <body>
@@ -20,6 +22,13 @@
         <div class="uk-container">
             <div class="uk-align-center uk-width-1-1 uk-padding-small">
                 <textarea class="uk-textarea uk-overflow-auto uk-height-large" id="variables" placeholder="Input Data from Overwatch.."></textarea>
+                <button class="uk-button uk-button-primary uk-margin" onclick="parseInput()">Convert Data</button>
+            </div>
+        </div>
+        <hr class="uk-divider-icon" />
+        <div class="uk-container">
+            <div class="uk-align-center uk-width-1-1 uk-padding-small">
+                <textarea class="uk-textarea uk-overflow-auto uk-height-large" id="variables" placeholder="Your data will appear here..." readonly></textarea>
             </div>
         </div>
     </div>

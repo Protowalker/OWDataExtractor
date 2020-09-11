@@ -1,5 +1,27 @@
 import "helper.del";
-//import "debug.del";
+import "debug.del";
+
+///SETTINGS
+
+
+//EVENTS
+globalvar define collectDamageEvents = WorkshopSettingToggle("Events", "Collect Damage Events", true);
+globalvar define collectHealingEvents = WorkshopSettingToggle("Events", "Collect Healing Events", true);
+globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", true);
+globalvar define collectFinalBlowEvents = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
+
+
+//DATA
+globalvar define collectIsAliveData = WorkshopSettingToggle("Data", "Collect \"Is Alive\" data", true);
+globalvar define collectPositionData = WorkshopSettingToggle("Data", "Collect Position data", true);
+globalvar define collectFacingData = WorkshopSettingToggle("Data", "Collect Facing Direction data", true);
+globalvar define collectAbilityData = WorkshopSettingToggle("Data", "Collect \"Active Ability\" data", true);
+
+globalvar define collectHealthData = WorkshopSettingToggle("Data", "Collect Health data", true);
+globalvar define collectVelocityData = WorkshopSettingToggle("Data", "Collect Velocity data", false);
+
+///
+
 
 enum Ability {
     Ability1 = 1,
@@ -59,7 +81,8 @@ define Name(define player): <"<0>", player>;
 
 rule: "Player Takes Damage"
 Event.OnDamageTaken 
-if(IsGameInProgress()){
+if(IsGameInProgress())
+if(collectDamageEvents){
     //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker()));
     //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
 
@@ -68,7 +91,8 @@ if(IsGameInProgress()){
 
 rule: "Player Receives Healing"
 Event.OnHealingTaken 
-if(IsGameInProgress()){
+if(IsGameInProgress())
+if(collectHealingEvents){
     //Healer().currentRoundData = Append(currentRoundData, getPlayerData(Healer()));
     //Healee().currentRoundData = Append(currentRoundData, getPlayerData(Healee()));
 
@@ -77,7 +101,8 @@ if(IsGameInProgress()){
 
 rule: "Player Dies"
 Event.OnFinalBlow
-if(IsGameInProgress()) {
+if(IsGameInProgress())
+if(collectFinalBlowEvents) {
     //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
     //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
     AppendToEvents(EventType.FinalBlow, Attacker(), Victim(), EventDamage());
@@ -86,6 +111,7 @@ if(IsGameInProgress()) {
 rule: "Player Takes Knockback"
 Event.PlayerDealtKnockback
 if(IsGameInProgress())
+if(collectKnockbackEvents)
  {
     //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
     //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
@@ -106,7 +132,8 @@ void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref 
         if(events[round] == 0){
             events[round] = [];
         }
-        events[round] = Append(events[round], [CRE_timestamp, CRE_type, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
+        events[round][CountOf(events[round])] = [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value];
+
         CRE_timestamp = [];
         CRE_type = [];
         CRE_aName = [];
@@ -143,20 +170,30 @@ void AppendToData(define player, define value){
 globalvar define data = [];
 globalvar define events = [];
 
+globalvar define activeDataPieces = [];
+
 rule: "Round complete, store final data"
 if(IsBetweenRounds() ||IsMatchComplete()){
     define round = MatchRound() - 1;
-    events[round] = Append(events[round], [CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
+    events[round][CountOf(events[round])] = [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value];
     CRE_timestamp = [];
     CRE_type = [];
     CRE_aName = [];
     CRE_vName = [];
     CRE_value = [];
+    
     eventIndex = 0;
     MinWait();
 
-    if(IsMatchComplete())
+    if(IsMatchComplete()){
+        activeDataPieces = [collectIsAliveData,
+                            collectPositionData,
+                            collectFacingData,
+                            collectHealthData,
+                            collectVelocityData,
+                            collectAbilityData];
         EnableInspectorRecording();
+    }
 }
 
 define getPlayerData(define player) {
@@ -173,12 +210,12 @@ define getPlayerData(define player) {
 
     return [
         MatchTime() + Millis,
-        EP_Alive,
-        EP_Position,
-        EP_Direction,
-        EP_Health,
-        EP_Velocity,
-        abilityFlags
+        collectIsAliveData ? EP_Alive : 0,
+        collectPositionData ? EP_Position : 0,
+        collectFacingData ? EP_Direction : 0,
+        collectHealthData ? EP_Health : 0,
+        collectVelocityData ? EP_Velocity : 0,
+        collectAbilityData ? abilityFlags : 0
     ];
 }
 
