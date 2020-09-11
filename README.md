@@ -1,14 +1,34 @@
 # OWDataExtractor
 Workshop tool for recording tournaments and exporting them as data
 
-## Import code: 66VH8
+## Import code: F4M6WT
 
 -------
 
 ### SPECIAL THANKS TO ZEZOMBYE FOR [OVERPY](https://github.com/Zezombye/overpy)  
 I use overpy's decompiler to extract the data. Without it this project would have been a *huge* pain in the ass.
 
+-------
 
+# HOW TO USE IT
+
+As the round is ending, go into the workshop inspector.  
+![inspector](Parser/images/inspector.png)  
+
+Wait for this list to fill up with the names of all the players:  
+Bad: ![list_not_full](Parser/images/list_not_full.png)
+Good: ![list_not_full](Parser/images/list_full.png)
+
+Click on the button labeled `(x)`
+![variable_button](Parser/images/variable_button.png)
+
+Go to the website (protowalker.github.io/OWDataExtractor) and paste into the box labeled "Input data from Overwatch.."
+
+The data will be parsed into nice JSON for you to read down below.
+
+-------------
+
+# HOW IT WORKS
 
 
 EVENTS: One array deep is the round. The next array deep is chunks of 50 events  
