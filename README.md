@@ -12,17 +12,17 @@ I use overpy's decompiler to extract the data. Without it this project would hav
 
 # HOW TO USE IT
 
-As the round is ending, go into the workshop inspector.  
+1. As the round is ending, go into the workshop inspector.  
 ![inspector](docs/images/inspector.png)  
 
-Wait for this list to fill up with the names of all the players:  
-Bad: ![list_not_full](docs/images/list_not_full.png)
-Good: ![list_not_full](docs/images/list_full.png)
+2. Wait for this list to fill up with the names of all the players:  
+Bad: ![list_not_full](docs/images/list_not_full.png)  
+Good: ![list_not_full](docs/images/list_full.png)  
 
-Click on the button labeled `(x)`
+3. Click on the button labeled `(x)`  
 ![variable_button](docs/images/variable_button.png)
 
-Go to the website (protowalker.github.io/OWDataExtractor) and paste into the box labeled "Input data from Overwatch.."
+4. Go to [the website](https://protowalker.github.io/OWDataExtractor) and paste into the box labeled "Input data from Overwatch.."
 
 The data will be parsed into nice JSON for you to read down below.
 
