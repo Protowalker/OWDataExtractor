@@ -39,10 +39,19 @@ function parseInput() {
     var eventsJson = eventsJson.replace(vectRegex, '[$<entries>]');
 
 
-    var data = JSON.parse(dataJson);
-    var events = JSON.parse(eventsJson);
+    var data = JSON.parse(dataJson).data;
+    var events = JSON.parse(eventsJson).events;
 
+    console.log(events);
 
+    for (round of events) {
+        for (chunk of round) {}
+        let count = round.length();
+        for (var i = 0; i < count; i++) {
+            let type = round[0][i];
+            let timestamp = round[1][i];
+        }
+    }
 
 }
 

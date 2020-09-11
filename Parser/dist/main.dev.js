@@ -51,8 +51,60 @@ function parseInput() {
   var eventsArray = events.slice(eventsArray);
   var eventsJson = '{"events": ' + eventsArray + '}';
   var eventsJson = eventsJson.replace(vectRegex, '[$<entries>]');
-  var data = JSON.parse(dataJson);
-  var events = JSON.parse(eventsJson);
+  var data = JSON.parse(dataJson).data;
+  var events = JSON.parse(eventsJson).events;
+  console.log(events);
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      round = _step.value;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = round[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          chunk = _step2.value;
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+            _iterator2["return"]();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      var count = round.length();
+
+      for (var i = 0; i < count; i++) {
+        var type = round[0][i];
+        var timestamp = round[1][i];
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+        _iterator["return"]();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
 }
 
 String.prototype.splice = function (idx, rem, str) {

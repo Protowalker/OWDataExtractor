@@ -158,7 +158,7 @@ void AppendToData(define player, define value){
             data[currentRound] = [];
         }
         
-        data[currentRound][GlobalPlayerSlot(player)] = Append(data[currentRound][GlobalPlayerSlot(player)], player.currentRoundData);
+        data[currentRound][GlobalPlayerSlot(player)][CountOf(data[currentRound][GlobalPlayerSlot(player)])] = player.currentRoundData;
         player.currentRoundData = [];
         player.dataIndex = 0;
     }
