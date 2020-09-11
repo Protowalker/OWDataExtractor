@@ -56,8 +56,7 @@ function parseInput() {
 
     let rounds = [];
 
-    for (let round of events) {
-
+    for (var i = 0; i < events.length; i++) {
         let roundOutput = {
             events: {
                 damage: [],
@@ -67,14 +66,13 @@ function parseInput() {
             }
         };
 
-        for (let chunk of round) {
-            let count = chunk[0].length;
-            for (var i = 0; i < count; i++) {
-                let type = chunk[0][i];
-                let timestamp = chunk[1][i];
-                let attacker_name = chunk[2][i];
-                let victim_name = chunk[3][i];
-                let value = chunk[4][i];
+        for (var j = 0; j < events[i].length; j += 7) {
+            for (var k = 0; k < events[i][j].length; k++) {
+                let type = events[i][j][k];
+                let timestamp = events[i][j + 1][k];
+                let attacker_name = events[i][j + 2][k];
+                let victim_name = events[i][j + 3][k];
+                let value = events[i][j + 4][k];
 
                 switch (type) {
                     case 0: //Damage
@@ -128,7 +126,12 @@ function parseInput() {
     let element = document.getElementById("output");
 
     element.value = JSON.stringify(output);
-    Prism.highlightAll();
+
+    element.select();
+    element.setSelectionRange(0, 9999999999999999999);
+    document.execCommand("copy");
+
+    alert("copied JSON to clipboard");
 }
 
 

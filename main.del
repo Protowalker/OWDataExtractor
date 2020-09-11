@@ -1,5 +1,5 @@
 import "helper.del";
-//import "debug.del";
+import "debug.del";
 
 ///SETTINGS
 
@@ -138,7 +138,7 @@ void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref 
         if(events[round] == 0){
             events[round] = [];
         }
-        events[round][CountOf(events[round])] = [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value];
+        events[round] = Append(events[round], [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
 
         CRE_timestamp = [];
         CRE_type = [];
@@ -159,7 +159,7 @@ void AppendToEvents(ref EventType type, ref define aName, ref define vName, ref 
 define GlobalPlayerSlot(define player): SlotOf(player) + (TeamOf(player)==Team.Team2)?6:0;
 
 void AppendToData(define player, define value){
-    if(player.dataIndex >= 50){
+    if(player.dataIndex >= 120){
         define currentRound = MatchRound() - 1;
         if(data[currentRound] == 0) {
             data[currentRound] = [];
@@ -182,7 +182,8 @@ globalvar define activeDataPieces = [];
 rule: "Round complete, store final data"
 if(IsBetweenRounds() ||IsMatchComplete()){
     define round = MatchRound() - 1;
-    events[round][CountOf(events[round])] = [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value];
+    events[round] = Append(events[round], [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
+
     CRE_timestamp = [];
     CRE_type = [];
     CRE_aName = [];

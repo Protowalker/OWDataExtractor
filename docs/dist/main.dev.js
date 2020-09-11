@@ -71,114 +71,74 @@ function parseInput() {
 
 
   var rounds = [];
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
 
-  try {
-    for (var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var round = _step.value;
-      var roundOutput = {
-        events: {
-          damage: [],
-          healing: [],
-          finalBlows: [],
-          knockback: []
-        }
-      };
-      var _iteratorNormalCompletion2 = true;
-      var _didIteratorError2 = false;
-      var _iteratorError2 = undefined;
-
-      try {
-        for (var _iterator2 = round[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var chunk = _step2.value;
-          var count = chunk[0].length;
-
-          for (var i = 0; i < count; i++) {
-            var type = chunk[0][i];
-            var timestamp = chunk[1][i];
-            var attacker_name = chunk[2][i];
-            var victim_name = chunk[3][i];
-            var value = chunk[4][i];
-
-            switch (type) {
-              case 0:
-                //Damage
-                var event = {
-                  timestamp: timestamp,
-                  attacker: attacker_name,
-                  victim: victim_name,
-                  amount: value
-                };
-                roundOutput.events.damage.push(event);
-                break;
-
-              case 1:
-                //Healing
-                var event = {
-                  timestamp: timestamp,
-                  healer: attacker_name,
-                  healee: victim_name,
-                  amount: value
-                };
-                roundOutput.events.healing.push(event);
-                break;
-
-              case 2:
-                //Final Blow
-                var event = {
-                  timestamp: timestamp,
-                  attacker: attacker_name,
-                  victim: victim_name,
-                  amount: value
-                };
-                roundOutput.events.finalBlows.push(event);
-                break;
-
-              case 3:
-                //knockback
-                var event = {
-                  timestamp: timestamp,
-                  attacker: attacker_name,
-                  victim: victim_name,
-                  direction_xyz: value
-                };
-                roundOutput.events.knockback.push(event);
-                break;
-            }
-          }
-        }
-      } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-            _iterator2["return"]();
-          }
-        } finally {
-          if (_didIteratorError2) {
-            throw _iteratorError2;
-          }
-        }
+  for (var i = 0; i < events.length; i++) {
+    var roundOutput = {
+      events: {
+        damage: [],
+        healing: [],
+        finalBlows: [],
+        knockback: []
       }
+    };
 
-      rounds.push(roundOutput);
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-        _iterator["return"]();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
+    for (var j = 0; j < events[i].length; j += 7) {
+      for (var k = 0; k < events[i][j].length; k++) {
+        var type = events[i][j][k];
+        var timestamp = events[i][j + 1][k];
+        var attacker_name = events[i][j + 2][k];
+        var victim_name = events[i][j + 3][k];
+        var value = events[i][j + 4][k];
+
+        switch (type) {
+          case 0:
+            //Damage
+            var event = {
+              timestamp: timestamp,
+              attacker: attacker_name,
+              victim: victim_name,
+              amount: value
+            };
+            roundOutput.events.damage.push(event);
+            break;
+
+          case 1:
+            //Healing
+            var event = {
+              timestamp: timestamp,
+              healer: attacker_name,
+              healee: victim_name,
+              amount: value
+            };
+            roundOutput.events.healing.push(event);
+            break;
+
+          case 2:
+            //Final Blow
+            var event = {
+              timestamp: timestamp,
+              attacker: attacker_name,
+              victim: victim_name,
+              amount: value
+            };
+            roundOutput.events.finalBlows.push(event);
+            break;
+
+          case 3:
+            //knockback
+            var event = {
+              timestamp: timestamp,
+              attacker: attacker_name,
+              victim: victim_name,
+              direction_xyz: value
+            };
+            roundOutput.events.knockback.push(event);
+            break;
+        }
       }
     }
+
+    rounds.push(roundOutput);
   }
 
   var output = {};
@@ -186,7 +146,10 @@ function parseInput() {
   output.roundTimestamps = roundTimestamps;
   var element = document.getElementById("output");
   element.value = JSON.stringify(output);
-  Prism.highlightAll();
+  element.select();
+  element.setSelectionRange(0, 9999999999999999999);
+  document.execCommand("copy");
+  alert("copied JSON to clipboard");
 }
 
 function getVariableFromOpy(script, variableName) {
