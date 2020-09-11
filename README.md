@@ -16,7 +16,7 @@ I use overpy's decompiler to extract the data. Without it this project would hav
 ![inspector](docs/images/inspector.png)  
 
 2. Wait for this list to fill up with the names of all the players:  
-Bad: ![list_not_full](docs/images/list_not_full.png)  
+Bad:  ![list_not_full](docs/images/list_not_full.png)  
 Good: ![list_not_full](docs/images/list_full.png)  
 
 3. Click on the button labeled `(x)`  
