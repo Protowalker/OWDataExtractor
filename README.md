@@ -26,7 +26,9 @@ Good:
 
 4. Go to [the website](https://protowalker.github.io/OWDataExtractor) and paste into the box labeled "Input data from Overwatch.."
 
-The data will be parsed into nice JSON for you to read down below.
+The data will be parsed into nice JSON for you to read in the bottom box.
+
+Hey! Is this data from a tournament or PUG? Consider making a pull request to https://github.com/Protowalker/OWDataExtractor_Dataset with your data. We're trying to compile a dataset for use in statistics and the creation of training modes -- maybe even, with enough data, an AI!
 
 -------------
 
