@@ -1,0 +1,95 @@
+import "variable_definitions.del";
+import "workshop_settings.del";
+import "setup.del";
+import "../helper.del";
+
+
+rule: "Player Takes Damage"
+Event.OnDamageTaken 
+if(IsGameInProgress())
+if(collectDamageEvents){
+    
+    ModifyVariable(damage_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
+    ModifyVariable(damage_event_attackers, Operation.AppendToArray, Attacker);
+    ModifyVariable(damage_event_victims, Operation.AppendToArray, Victim);
+    ModifyVariable(damage_event_values, Operation.AppendToArray, EventDamage);
+
+    if(CountOf(damage_event_timestamps) >= 50) {
+        ModifyVariable(current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+        ModifyVariable(current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+        ModifyVariable(current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+        ModifyVariable(current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+
+        damage_event_timestamps = [];
+        damage_event_attackers = [];
+        damage_event_victims = [];
+        damage_event_values = [];
+    }
+}
+
+rule: "Player Receives Healing"
+Event.OnHealingTaken 
+if(IsGameInProgress())
+if(collectHealingEvents){
+    ModifyVariable(damage_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
+    ModifyVariable(damage_event_attackers, Operation.AppendToArray, Healer);
+    ModifyVariable(damage_event_victims, Operation.AppendToArray, Healee);
+    ModifyVariable(damage_event_values, Operation.AppendToArray, EventHealing);
+
+    if(CountOf(damage_event_timestamps) >= 50) {
+        ModifyVariable(current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+        ModifyVariable(current_round_healing_healer_chunks, Operation.AppendToArray, [healing_event_healers]);
+        ModifyVariable(current_round_healing_healee_chunks, Operation.AppendToArray, [healing_event_healees]);
+        ModifyVariable(current_round_healing_value_chunks, Operation.AppendToArray, [healing_event_values]);
+
+        healing_event_timestamps = [];
+        healing_event_healers = [];
+        healing_event_healees = [];
+        healing_event_values = [];
+    }
+}
+
+rule: "Player Dies"
+Event.OnFinalBlow
+if(IsGameInProgress())
+if(collectFinalBlowEvents) {
+    ModifyVariable(final_blow_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
+    ModifyVariable(final_blow_event_attackers, Operation.AppendToArray, Attacker);
+    ModifyVariable(final_blow_event_victims, Operation.AppendToArray, Victim);
+    ModifyVariable(final_blow_event_values, Operation.AppendToArray, EventDamage);
+
+    if(CountOf(final_blow_event_timestamps) >= 50) {
+        ModifyVariable(current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+        ModifyVariable(current_round_final_blow_attacker_chunks, Operation.AppendToArray, [final_blow_event_attackers]);
+        ModifyVariable(current_round_final_blow_victim_chunks, Operation.AppendToArray, [final_blow_event_victims]);
+        ModifyVariable(current_round_final_blow_value_chunks, Operation.AppendToArray, [final_blow_event_values]);
+
+        final_blow_event_timestamps = [];
+        final_blow_event_attackers = [];
+        final_blow_event_victims = [];
+        final_blow_event_values = [];
+    }
+}
+
+rule: "Player Takes Knockback"
+Event.PlayerDealtKnockback
+if(IsGameInProgress())
+if(collectKnockbackEvents)
+ {
+    ModifyVariable(knockback_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
+    ModifyVariable(knockback_event_attackers, Operation.AppendToArray, Attacker);
+    ModifyVariable(knockback_event_victims, Operation.AppendToArray, Victim);
+    ModifyVariable(knockback_event_values, Operation.AppendToArray, EventDamage);
+
+    if(CountOf(damage_event_timestamps) >= 50) {
+        ModifyVariable(current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+        ModifyVariable(current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+        ModifyVariable(current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+        ModifyVariable(current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+
+        knockback_event_timestamps = [];
+        knockback_event_attackers = [];
+        knockback_event_victims = [];
+        knockback_event_values = [];
+    }
+}

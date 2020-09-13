@@ -1,21 +1,66 @@
+//PLAYER KEYWORDS
 define EventPlayer: EventPlayer();
+define HostPlayer: HostPlayer();
+define Attacker: Attacker();
+define Victim: Victim();
+define Healer: Healer();
+define Healee: Healee();
+//////
 
+//EVENT PLAYER KEYWORDS
 define EP_Position: PositionOf(EventPlayer);
 define EP_EyePosition: EyePosition(EventPlayer);
 define EP_Direction: FacingDirectionOf(EventPlayer);
-
 define EP_Hero: HeroOf(EventPlayer);
 define EP_Health: Health(EventPlayer);
-
 define EP_Velocity: VelocityOf(EventPlayer);
 define EP_Alive: IsAlive(EventPlayer);
+define EP_Team: TeamOf(EventPlayer);
+define EP_HasSpawned: HasSpawned(EventPlayer);
+
+/////
+
+//HOST PLAYER KEYWORDS
+define HP_Position: PositionOf(HostPlayer);
+define HP_EyePosition: EyePosition(HostPlayer);
+define HP_Direction: FacingDirectionOf(HostPlayer);
+define HP_Hero: HeroOf(HostPlayer);
+define HP_Health: Health(HostPlayer);
+define HP_Velocity: VelocityOf(HostPlayer);
+define HP_Alive: IsAlive(HostPlayer);
+define HP_Team: TeamOf(HostPlayer);
+define HP_HasSpawned: HasSpawned(HostPlayer);
+/////
 
 
-
+//TIME-RELATED
 define TICK_LENGTH: 1/62.5;
-
 define WaitTicks(define tickCount): Wait(tickCount*TICK_LENGTH);
+/////
 
-
-
+//ARRAY-RELATED
 define ArrayIndex: CurrentArrayIndex();
+define ArrayElement: ArrayElement();
+/////
+
+//ARRAY SHORTHANDS
+define AllOtherPlayers(define player=EventPlayer(), define team=Team.All): RemoveFromArray(AllPlayers(team), player);
+define AllOtherLivingPlayers(define player, define team=Team.All): RemoveFromArray(AllLivingPlayers(team), player);
+
+
+//KEYWORDS
+
+define abort: Abort();
+define loop: Loop();
+define abort_true: AbortIfConditionIsTrue();
+define abort_false: AbortIfConditionIsFalse();
+
+define loop_true: LoopIfConditionIsTrue();
+define loop_false: LoopIfConditionIsFalse();
+
+
+
+//EVENT-RELATED
+define EventDamage: EventDamage();
+define EventHealing: EventHealing();
+define EventDirection: EventDirection();

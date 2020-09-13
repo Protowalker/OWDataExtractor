@@ -1,0 +1,45 @@
+globalvar define damage_event_timestamps = [];
+globalvar define damage_event_attackers = [];
+globalvar define damage_event_victims = [];
+globalvar define damage_event_values = [];
+
+globalvar define healing_event_timestamps = [];
+globalvar define healing_event_healers = [];
+globalvar define healing_event_healees = [];
+globalvar define healing_event_values = [];
+
+globalvar define final_blow_event_timestamps = [];
+globalvar define final_blow_event_attackers = [];
+globalvar define final_blow_event_victims = [];
+globalvar define final_blow_event_values = [];
+
+globalvar define knockback_event_timestamps = [];
+globalvar define knockback_event_attackers = [];
+globalvar define knockback_event_victims = [];
+globalvar define knockback_event_values = [];
+
+
+globalvar define current_round_damage_timestamp_chunks = [];
+globalvar define current_round_damage_attacker_chunks = [];
+globalvar define current_round_damage_victim_chunks = [];
+globalvar define current_round_damage_value_chunks = [];
+
+globalvar define current_round_healing_timestamp_chunks = [];
+globalvar define current_round_healing_healer_chunks = [];
+globalvar define current_round_healing_healee_chunks = [];
+globalvar define current_round_healing_value_chunks = [];
+
+
+globalvar define current_round_final_blow_timestamp_chunks = [];
+globalvar define current_round_final_blow_attacker_chunks = [];
+globalvar define current_round_final_blow_victim_chunks = [];
+globalvar define current_round_final_blow_value_chunks = [];
+
+globalvar define current_round_knockback_timestamp_chunks = [];
+globalvar define current_round_knockback_attacker_chunks = [];
+globalvar define current_round_knockback_victim_chunks = [];
+globalvar define current_round_knockback_value_chunks = [];
+
+
+globalvar define events_per_round = [];
+globalvar define data_per_round = [];
