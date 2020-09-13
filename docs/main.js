@@ -42,17 +42,6 @@ function parseInput() {
         createErrorAlert(e);
     }
 
-    // {
-    //  rounds:[] {   
-    //         events: {
-    //         damage: [],
-    //         healing: [],
-    //         finalBlows: [],
-    //         knockback: []
-    //     }
-    //    }
-    // }
-
 
     let rounds = [];
 

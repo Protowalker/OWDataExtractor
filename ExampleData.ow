@@ -1,6 +1,7 @@
 variables
 {
 	global:
+		0: _extendedGlobalCollection
 		1: _arrayBuilder
 		2: collectDamageEvents
 		3: collectHealingEvents
@@ -18,352 +19,54 @@ variables
 		15: CRE_vName
 		16: CRE_value
 		18: timer
-		19: data
-		20: events
-		21: activeDataPieces
+		19: roundTimestamps
+		20: data
+		21: events
+		22: activeDataPieces
+		23: round
+		24: currentRound
 }
 
 actions
 {
-	Global._arrayBuilder = Array(Array(Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), Array(48.438, 48.822, 48.206, 48.526, 49.006, 49.390, 49.774,
-		49.094, 49.542, 49.926, 50.310, 50.630, 51.262, 51.710, 51.030, 51.094, 51.478, 51.798, 51.798, 52.598, 52.430, 53.678, 53.062,
-		53.286, 53.446, 53.766, 54.054, 54.854, 54.654, 55.454, 55.222, 56.502, 56.302, 57.102, 57.902, 57.382, 57.766, 58.150, 58.470,
-		58.630, 58.982, 58.982, 58.046, 58.142, 58.206, 58.366, 58.430, 58.750, 59.070, 59.230), Array(Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk")), Array(Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker")), Array(
-		2.560, 7.680, 7.680, 2.080, 2.560, 7.680, 7.680, 2.080, 2.560, 7.680, 7.680, 2.080, 8.800, 3.072, 8.800, 9.216, 9.216, 8.800,
-		2.496, 13.800, 13.800, 3.072, 9.216, 13.800, 9.216, 2.496, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800,
-		13.800, 3.072, 9.216, 9.216, 2.496, 13.800, 3.072, 5, 5, 5, 5, 9.216, 13.800, 9.216, 2.496, 13.800)), Array(Array(0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,
-		0, 0, 0, 0), Array(59.318, 59.382, 60.150, 60.374, 60.758, 60.950, 61.014, 60.078, 60.142, 60.174, 60.238, 60.846, 60.910,
-		60.942, 61.006, 61.070, 61.325, 61.709, 61.997, 61.061, 61.093, 61.157, 61.221, 62.693, 62.429, 62.493, 62.493, 62.589, 62.653,
-		63.293, 63.549, 63.933, 63.093, 63.317, 63.893, 64.181, 64.405, 64.469, 64.469, 64.565, 64.661, 64.853, 64.949, 64.205, 64.237,
-		64.269, 64.365, 64.429, 64.493, 64.493), Array(Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana 2")), Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker")), Array(10, 5, 13.800, 7.800, 7.200, 13.800,
-		5, 5, 3.750, 5, 5, 5, 5, 2.880, 10, 10, 2.880, 2.880, 5, 5, 1.360, 5, 5, 13.800, 10, 13.800, 10, 5, 5, 13.800, 7.800, 7.200,
-		13.800, 3.750, 13.800, 7.800, 5, 2.880, 5, 7.200, 13.800, 2.880, 3.750, 5, 2.880, 5, 5, 5, 13.800, 3.072)), Array(Array(1, 0,
-		0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 3, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0,
-		0, 0, 0, 0, 0, 0), Array(64.621, 64.749, 64.813, 64.877, 64.909, 65.005, 65.261, 65.389, 65.581, 65.773, 65.157, 65.349,
-		65.541, 65.925, 66.149, 66.309, 66.341, 66.341, 66.693, 66.757, 66.821, 66.917, 66.981, 66.077, 66.461, 66.557, 66.813, 66.845,
-		66.877, 66.973, 67.037, 67.229, 67.741, 67.805, 67.901, 67.965, 67.125, 68.213, 68.597, 68.917, 68.981, 68.589, 68.589, 69.389,
-		69.869, 69.125, 70.461, 70.845, 71.229, 71.549), Array(Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")), Array(Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("ana"), Custom String("ana"), Custom String("ana"), Custom String("ana")), Array(2.880, 5, 5,
-		9.216, 5, 2.880, 9.216, 2.880, 2.496, 2.880, 2.880, 13.800, 2.880, 2.880, 13.800, 2.880, 9.600, Vector(-0.916, -0.167, 0.365),
-		2.880, 5, 5, 5, 5, 2.880, 2.880, 13.800, 5, 2.880, 5, 5, 5, 1.800, 5, 5, 5, 5, 13.800, 7.800, 7.200, 25, 3.750, 25, 15, 5, 5,
-		5, 3.072, 9.216, 9.216, 2.496)), Array(Array(0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 3, 1, 1, 0, 0, 0, 3,
-		0, 0, 3, 3, 0, 1, 0, 1, 1, 0, 1, 1, 0, 3, 1, 1, 0, 1, 1, 1, 1, 1, 0), Array(71.093, 71.157, 71.477, 71.541, 71.861, 71.925,
-		72.181, 72.693, 72.077, 72.461, 72.557, 72.781, 72.941, 73.325, 73.549, 73.933, 73.317, 73.637, 74.821, 74.949, 74.949, 74.205,
-		74.589, 75.005, 75.069, 75.325, 75.485, 75.485, 75.549, 75.549, 75.868, 75.868, 75.412, 75.700, 75.796, 76.180, 77.516, 77.676,
-		77.060, 77.252, 77.252, 77.444, 79.004, 79.036, 79.388, 79.612, 79.772, 79.996, 79.188, 79.188), Array(Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana"), Custom String("cybermonk"), Custom String(
-		"ana"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana")), Array(
-		Custom String("ana"), Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk")), Array(3.072, 11.700, 9.216, 10.800, 9.216, 5.625,
-		2.496, 2.560, 7.680, 7.680, 11.700, 2.080, 7.200, 3.750, 2.560, 7.680, 7.680, 2.080, 7.800, 8, Vector(-0.676, 0.000, 0.737),
-		7.200, 3.750, 5, 5, 13.800, Vector(-0.795, -0.001, 0.607), 9.600, 8, Vector(-0.491, 0, 0.871), Vector(0.615, -0.001, -0.788),
-		30, 7.800, 13.800, 7.200, 3.750, 11.500, 7.800, 7.200, 8, Vector(0.268, 0.000, -0.963), 3.750, 7.800, 13.800, 7.200, 7.800,
-		3.750, 7.200, 25, 15)), Array(Array(1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0), Array(79.188, 79.284, 81.476, 81.860, 82.020, 82.244, 82.404,
-		82.564, 82.660, 82.660, 82.756, 82.788, 82.044, 82.108, 82.140, 82.428, 82.524, 82.812, 82.908, 83.132, 83.292, 83.676, 83.868,
-		83.060, 83.252, 83.444, 83.636, 83.828, 83.956, 84.180, 84.212, 84.596, 84.980, 84.364, 84.748, 85.132, 85.516, 85.900, 85.284,
-		85.540, 87.412, 87.796, 88.052, 88.180, 88.788, 89.452, 91.579, 91.579, 91.867, 91.251), Array(Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2")), Array(Custom String("ana"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("Protowalker")), Array(25, 15, 2.560, 7.680, 2.560, 7.680, 7.680, 2.080, Vector(
-		-0.256, 0, 0.967), 50, 2.880, 7.680, 2.560, 2.080, 2.880, 7.680, 2.880, 7.680, 2.880, 2.496, 2.880, 2.880, 3.072, 2.880, 9.216,
-		2.880, 9.216, 2.880, 2.496, 13.800, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 1.040, 5, 7.800, 7.200, 13.800,
-		3.750, 13.800, 11.500, 15, 25, 3.072, 9.216)), Array(Array(3, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 1, 1, 1, 1, 0, 1,
-		1, 1, 1, 0, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0), Array(91.475, 91.475, 91.571, 91.635, 91.955,
-		91.955, 92.339, 92.723, 92.107, 92.491, 92.875, 93.259, 93.643, 93.027, 93.059, 93.251, 93.251, 93.411, 93.795, 94.179, 94.563,
-		94.691, 94.947, 94.331, 94.715, 95.099, 95.323, 96.075, 96.075, 96.171, 96.555, 96.939, 97.323, 97.707, 97.707, 97.803, 97.867,
-		97.963, 97.027, 97.091, 97.123, 97.187, 97.283, 97.347, 97.443, 97.475, 97.475, 97.475, 97.507, 97.603), Array(Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")), Array(Vector(0.687, 0, -0.727), 50,
-		2.880, 9.216, 2.496, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 13.800, 8, Vector(0.248, 0.389, 0.887),
-		2.880, 2.880, 2.880, 2.880, 13.800, 2.880, 2.880, 2.880, 1.040, 13.800, Vector(-0.907, 0.002, -0.422), 76.907, 2.880, 2.880,
-		2.880, 2.880, 2.880, 5, 5, 5, 5, 5, 2.880, 5, 5, 5, 5, 5, 9.600, Vector(0.835, -0.345, 0.429), 2.880, 5, 5)), Array(Array(0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1, 1, 3, 0, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0, 0, 1, 1, 1, 0,
-		1, 0, 1, 1, 1, 1), Array(97.667, 97.859, 98.243, 98.307, 98.403, 98.467, 98.563, 98.627, 98.627, 98.723, 98.755, 98.755,
-		99.011, 98.395, 98.619, 98.619, 98.779, 98.811, 99.163, 99.547, 99.675, 99.675, 99.899, 99.931, 99.283, 99.315, 99.667, 99.699,
-		99.955, 100.083, 100.467, 100.851, 100.235, 100.619, 101.003, 101.387, 101.771, 101.899, 101.899, 101.899, 101.155, 101.539,
-		101.923, 102.051, 102.307, 102.595, 102.595, 102.691, 102.075, 102.459), Array(Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk")), Array(Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")),
-		Array(10, 2.880, 2.880, 10, 5, 5, 5, 2.880, 5, 5, Vector(-0.773, 0.002, -0.635), 30, 2.880, 2.880, Vector(-0.873, 0.000,
-		-0.488), 8, 2.880, 5, 2.880, 2.880, 8, Vector(0.178, -0.000, 0.984), 7.800, 2.880, 7.200, 2.880, 3.750, 2.880, 5, 2.880, 2.880,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, Vector(-0.115, -0.000, 0.993), 13.800, 9.600, 2.880, 2.880, 2.880, 13.800, 2.880, 15,
-		25, 2.880, 2.880, 2.880)), Array(Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0,
-		0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 1, 0, 0), Array(102.843, 103.227, 103.611, 103.995, 103.379, 103.763,
-		104.147, 104.531, 104.915, 104.298, 104.682, 105.066, 105.226, 105.226, 105.450, 105.610, 105.834, 105.218, 105.602, 105.986,
-		106.370, 106.754, 106.818, 106.138, 106.202, 106.202, 106.522, 106.586, 106.586, 106.650, 106.746, 106.810, 106.906, 106.906,
-		106.906, 106.970, 106.970, 107.066, 107.130, 107.226, 107.290, 107.290, 107.386, 107.386, 107.386, 107.418, 107.450, 107.674,
-		107.802, 107.930), Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("Protowalker")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2")), Array(2.880, 2.880,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 9.600, Vector(-0.994, 0.001, 0.110), 2.880, 11.500,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.560, 2.880, 7.680, 13.800, 2.880, 7.680, 5, 5, 5, 5, 2.080, 2.880, 5, 5, 13.800, 5,
-		5, 5, 2.880, 5, 5, Vector(-0.918, 0.000, 0.397), 9.600, 2.560, 5, 2.880, 7.680, 5)), Array(Array(0, 1, 0, 0, 0, 0, 1, 0, 1, 1,
-		0, 1, 1, 1, 1, 3, 0, 0, 3, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 3, 0, 1, 1), Array(
-		107.026, 107.058, 107.090, 107.186, 107.186, 107.410, 107.442, 107.506, 107.826, 108.210, 108.274, 108.594, 108.978, 108.362,
-		108.746, 108.778, 108.778, 109.002, 109.002, 109.130, 109.514, 109.898, 109.282, 109.666, 109.666, 110.050, 110.050, 110.434,
-		110.434, 110.754, 110.786, 110.818, 110.202, 110.586, 110.970, 111.354, 111.738, 111.122, 111.506, 111.890, 112.274, 112.658,
-		112.818, 112.818, 112.042, 112.042, 112.266, 112.266, 112.426, 112.810), Array(Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String(
-		"ana"), Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("0"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk")), Array(Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2")), Array(5, 2.880, 5, 7.680, 10, 5, 2.880, 2.496,
-		2.880, 2.880, 18, 2.880, 2.880, 2.880, 2.880, Vector(-0.779, -0.299, 0.551), 8, 8, Vector(0.628, 0.301, -0.718), 2.880, 2.880,
-		2.880, 2.880, 2.880, 2.560, 2.880, 7.680, 2.880, 7.680, 2.080, 5, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880,
-		2.880, 2.880, 2.880, 8, Vector(0.775, 0, -0.632), 75, 2.880, Vector(-0.972, 0, 0.234), 9.600, 2.880, 2.880)), Array(Array(0, 1,
-		0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		0, 0, 0, 0, 0, 0), Array(113.130, 113.194, 113.514, 113.578, 113.770, 113.770, 113.770, 113.898, 113.218, 114.114, 114.498,
-		114.882, 114.202, 115.130, 115.130, 115.442, 115.442, 117.578, 117.026, 117.250, 117.250, 117.410, 117.794, 118.178, 118.562,
-		118.946, 118.330, 118.714, 118.906, 118.906, 119.098, 119.481, 119.865, 119.249, 119.633, 120.017, 120.401, 120.785, 120.169,
-		120.553, 120.937, 121.321, 121.705, 121.089, 123.065, 123.129, 123.705, 123.185, 123.249, 123.889), Array(Custom String("ana"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("0"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker")), Array(2.560, 2.880, 7.680,
-		2.880, 15, 15, 25, 7.680, 2.080, 3.072, 9.216, 9.216, 2.496, 8, Vector(0.116, 0, -0.993), Vector(0.995, 0, -0.102), 9.600, 75,
-		2.880, 11.800, 11.800, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 25, 1.440, 4.320, 4.320, 4.320, 4.320, 4.320, 4.320,
-		4.320, 4.320, 4.320, 4.320, 4.320, 4.320, 4.320, 0.267, 3.861, 7.882, 4.268, 4.302, 4.278, 3.072)), Array(Array(0, 0, 0, 0, 0,
-		3, 3, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0,
-		1, 2, 1), Array(124.145, 124.273, 124.657, 124.881, 124.977, 126.745, 126.745, 126.745, 126.745, 126.841, 127.225, 127.609,
-		127.993, 127.377, 127.537, 127.761, 127.857, 127.921, 128.017, 128.145, 128.177, 128.241, 128.337, 128.401, 128.497, 128.529,
-		128.561, 128.721, 128.817, 128.881, 128.913, 128.977, 128.041, 128.137, 128.201, 128.297, 128.297, 128.361, 128.457, 128.521,
-		128.681, 128.777, 129.065, 129.161, 129.449, 129.737, 129.801, 129.833, 129.897, 129.897), Array(Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk")), Array(
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2")), Array(13.800, 9.216,
-		9.216, 13.800, 2.496, Vector(-0.557, 0, -0.831), Vector(-0.339, 0, -0.941), 100, 86.592, 2.880, 2.880, 2.880, 2.880, 2.880, 5,
-		2.880, 5, 5, 5, 2.880, 5, 5, 5, 5, 10, 2.880, 10, 5, 10, 5, 2.880, 5, 5, 5, 5, 2.880, 10, 5, 5, 5, 2.880, 5, 2.880, 13.800,
-		2.880, 10, 10, 2.880, 1.497, 0.480)), Array(Array(0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0), Array(
-		129.897, 129.930, 129.985, 129.985, 130.338, 130.338, 131.194, 131.258, 131.354, 131.418, 131.514, 131.578, 131.674, 131.738,
-		131.834, 132.370, 132.754, 132.138, 132.459, 133.003, 133.003), Array(Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("Protowalker")), Array(Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2")), Array(1.497,
-		11.500, 15, 25, Vector(0.963, -0.001, -0.270), 30, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2.560, 7.680, 7.680, 2.080, 35.800, 35.800)));
+	Global._extendedGlobalCollection = Array(0, 6);
+	Global._arrayBuilder = Array(Array(0, Array(240.966, True, Vector(-109.796, 4, -78.604), Vector(0.707, -0.003, 0.708), 600, 0, 0),
+		Array(235.965, True, Vector(-67.823, 4.569, -52.779), Vector(0.676, -0.124, 0.726), 600, 0, 9), Array(230.965, True, Vector(
+		1.460, 6, -73.297), Vector(0.869, -0.305, -0.389), 600, 0, 0), Array(224.965, True, Vector(21.745, 5.972, -71.656), Vector(
+		-0.855, -0.016, -0.519), 600, 0, 1), Array(219.964, True, Vector(-18.418, 5.851, -82.739), Vector(-0.517, -0.088, 0.851), 600,
+		0, 9), Array(214.964, True, Vector(-47.023, 8.976, -46.882), Vector(-0.929, -0.367, 0.049), 599.675, 0, 0), Array(0.026, True,
+		Vector(-61.313, 4, -43.757), Vector(0.717, -0.128, -0.685), 600, 0, 0), Array(0.034, True, Vector(-58.518, 4.582, -48.969),
+		Vector(0.884, -0.203, -0.421), 600, 0, 0)), 0, 0, 0, 0, 0, Array(0, Array(240.966, True, Vector(-108.735, 4, -79.664), Vector(
+		0.715, -0.005, 0.699), 200, 0, 0), Array(235.965, True, Vector(-80.582, 4, -63.063), Vector(0.772, -0.089, 0.629), 200, 0, 4),
+		Array(230.965, True, Vector(-49.362, 5.065, -52.744), Vector(0.955, -0.132, -0.267), 200, 0, 0), Array(224.965, True, Vector(
+		-34.418, 6.828, -65.926), Vector(0.991, 0.001, 0.133), 200, 0, 0), Array(219.964, True, Vector(-34.512, 5.848, -63.931),
+		Vector(-0.496, -0.151, 0.855), 200, 0, 4), Array(214.964, True, Vector(-43.746, 10.323, -47.802), Vector(-0.966, -0.238,
+		0.106), 200, 0, 0), Array(0.026, True, Vector(-48.744, 5.990, -56.642), Vector(0.173, -0.058, 0.983), 200, 0, 0), Array(0.034,
+		True, Vector(-60.652, 4, -46.380), Vector(0.444, 0.033, -0.895), 200, 0, 0), Array(240.966, True, Vector(64.896, 4, -64.987),
+		Vector(-1, 0, 0), 500, 0, 0), Array(235.965, True, Vector(64.896, 4, -64.987), Vector(-1, 0, 0), 500, 0, 0), Array(230.965,
+		True, Vector(64.896, 4, -64.987), Vector(-1, 0, 0), 500, 0, 0), Array(224.965, True, Vector(55.351, 4.077, -67.836), Vector(-1,
+		0, 0), 500, 0, 0), Array(219.964, True, Vector(46.856, 6.008, -63.885), Vector(-1, 0, 0), 500, 0, 0), Array(214.964, True,
+		Vector(46.856, 6.008, -63.885), Vector(-1, 0, 0), 500, 0, 0), Array(0.026, True, Vector(43.029, 6.607, -63.377), Vector(-0.999,
+		-0.005, -0.037), 500, 0, 4), Array(0.034, True, Vector(16.229, 6.957, -62.870), Vector(-0.986, -0.157, 0.049), 500, 0, 4),
+		Array(240.966, True, Vector(63.416, 4, -63.929), Vector(-0.332, 0.006, -0.943), 200, 0, 1), Array(235.965, True, Vector(31.248,
+		6, -64.021), Vector(-0.029, 0.010, -1.000), 200, 0, 1), Array(230.965, True, Vector(4.034, 6, -55.646), Vector(-0.985, -0.005,
+		0.172), 200, 0, 1), Array(224.965, True, Vector(-13.754, 6.074, -64.103), Vector(-0.996, 0.065, -0.063), 131.408, 0, 7), Array(
+		219.964, True, Vector(-36.831, 5.850, -59.455), Vector(0.700, 0.412, -0.583), 124.576, 0, 3), Array(214.964, True, Vector(
+		-61.788, 4.021, -42.007), Vector(-0.454, 0.013, -0.891), 13.384, 0, 1), Array(0.026, False, Vector(-61.788, 4.021, -42.007),
+		Vector(0.002, -0.687, 0.727), 0, 0, 0), Array(0.034, False, Vector(-61.788, 4.021, -42.007), Vector(-0.060, -0.753, 0.655), 0,
+		0, 0), Array(240.966, True, Vector(63.249, 4, -67.111), Vector(-0.999, 0.026, -0.032), 200, 0, 3), Array(235.965, True, Vector(
+		32.022, 6.064, -65.070), Vector(-0.998, -0.023, -0.064), 200, 0, 1), Array(230.965, True, Vector(6.587, 6, -55.706), Vector(
+		-0.418, 0.008, -0.908), 200, 0, 1), Array(224.965, True, Vector(-21.503, 6.025, -65.636), Vector(-0.980, -0.092, -0.174), 200,
+		0, 0), Array(219.964, True, Vector(-43.479, 6, -55.637), Vector(0.741, 0.098, -0.664), 200, 0, 0), Array(214.964, True, Vector(
+		-54.038, 4.277, -50.224), Vector(0.822, 0.532, 0.204), 200, 0, 4), Array(0.026, True, Vector(-47.069, 4.278, -45.705), Vector(
+		0.434, -0.051, -0.900), 184.842, 0, 0), Array(0.034, False, Vector(-60.428, 3.948, -40.143), Vector(0.137, -0.004, -0.991), 0,
+		0, 0), Array(240.966, True, Vector(-108.205, 4, -78.073), Vector(0.829, 0.009, 0.559), 200, 0, 1), Array(235.965, True, Vector(
+		-95.504, 4, -67.504), Vector(1.000, 0.008, 0.026), 200, 0, 3), Array(230.965, True, Vector(-79.596, 3.850, -52.409), Vector(
+		0.999, 0.018, -0.029), 200, 0, 1), Array(224.965, True, Vector(-76.910, 3.850, -51.119), Vector(0.961, 0.021, -0.277), 200, 0,
+		1), Array(219.964, True, Vector(-70.925, 3.850, -52.143), Vector(0.991, 0.090, -0.100), 200, 0, 5), Array(214.964, True,
+		Vector(-71.274, 3.850, -54.532), Vector(0.685, -0.003, 0.729), 200, 0, 1), Array(0.026, True, Vector(-50.097, 4.890, -54.248),
+		Vector(0.285, -0.077, 0.955), 200, 0, 1), Array(0.034, True, Vector(-58.646, 3.850, -52.794), Vector(0.994, 0.014, -0.109),
+		200, 0, 1)));
 	Global.collectDamageEvents = True;
 	Global.collectHealingEvents = True;
 	Global.collectKnockbackEvents = True;
@@ -379,346 +82,545 @@ actions
 	Global.CRE_aName = Array();
 	Global.CRE_vName = Array();
 	Global.CRE_value = Array();
-	Global.timer = 151.811;
-	Global.data = Array();
-	Global.events = Array(Array(Array(Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), Array(48.438, 48.822, 48.206, 48.526, 49.006, 49.390, 49.774,
-		49.094, 49.542, 49.926, 50.310, 50.630, 51.262, 51.710, 51.030, 51.094, 51.478, 51.798, 51.798, 52.598, 52.430, 53.678, 53.062,
-		53.286, 53.446, 53.766, 54.054, 54.854, 54.654, 55.454, 55.222, 56.502, 56.302, 57.102, 57.902, 57.382, 57.766, 58.150, 58.470,
-		58.630, 58.982, 58.982, 58.046, 58.142, 58.206, 58.366, 58.430, 58.750, 59.070, 59.230), Array(Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("cybermonk")), Array(Custom String("Protowalker"), Custom String("Protowalker"),
+	Global.timer = 128.042;
+	Global.roundTimestamps = Array(21.855, 87.999);
+	Global.data = Array(Array(Array(0, Array(240.825, True, Vector(-39.525, 6, -59.387), Vector(-0.924, 0.147, 0.352), 600, 0, 1),
+		Array(235.825, True, Vector(-37.840, 5.850, -53.222), Vector(-0.782, -0.250, 0.571), 600, 0, 9), Array(230.825, True, Vector(
+		-34.885, 14.007, -44.176), Vector(-0.912, -0.409, 0.020), 600, 0, 9), Array(225.825, True, Vector(-59.927, 9.621, -46.496),
+		Vector(-0.866, -0.500, -0.021), 600, 0, 1), Array(220.825, True, Vector(-67.712, 4, -56.648), Vector(0.088, -0.068, -0.994),
+		820.600, 0, 6), Array(215.824, True, Vector(-53.403, 6, -77.851), Vector(0.814, -0.231, 0.533), 718.600, 0, 2), Array(210.824,
+		True, Vector(-58.715, 13.933, -51.711), Vector(0.646, -0.735, 0.206), 600, 0, 1), Array(205.824, True, Vector(-49.888, 4,
+		-44.392), Vector(-0.887, -0.041, -0.460), 489.835, 0, 4), Array(200.823, True, Vector(-69.525, 8.481, -48.839), Vector(-0.394,
+		-0.801, 0.451), 599.755, 0, 1), Array(195.823, True, Vector(-66.545, 5.734, -65.344), Vector(-0.010, -0.112, 0.994), 600, 0,
+		0), Array(190.823, True, Vector(-61.544, 18.930, -50.976), Vector(0.077, -0.788, -0.611), 600, 0, 1)), 0, 0, 0, 0, 0, Array(0,
+		Array(240.825, True, Vector(0.943, 6.957, -76.305), Vector(-0.752, -0.166, 0.638), 200, 0, 0), Array(235.825, True, Vector(
+		-24.770, 6.025, -61.530), Vector(-0.935, -0.029, 0.354), 200, 0, 0), Array(230.825, True, Vector(-50.780, 6.958, -54.028),
+		Vector(-0.951, -0.117, 0.285), 200, 0, 1), Array(225.825, True, Vector(-52.697, 4.484, -52.691), Vector(-0.993, -0.115,
+		-0.026), 4.600, 0, 4), Array(220.825, True, Vector(-35.555, 6.263, -53.885), Vector(-0.987, -0.116, 0.110), 78.760, 0, 8),
+		Array(215.824, True, Vector(-35.929, 6.331, -43.049), Vector(-0.942, -0.063, -0.331), 134.440, 0, 0), Array(210.824, True,
+		Vector(-36.770, 5.850, -52.173), Vector(-0.997, 0.063, 0.050), 184.600, 0, 0), Array(205.824, True, Vector(-55.410, 5.286,
+		-47.396), Vector(-0.842, -0.116, -0.527), 184.600, 0, 4), Array(200.823, True, Vector(-59.687, 4, -45.794), Vector(-0.978,
+		-0.024, -0.209), 200, 0, 0), Array(195.823, True, Vector(-71.232, 3.850, -50.145), Vector(0.641, 0.042, -0.766), 200, 0, 0),
+		Array(190.823, True, Vector(-65.493, 4.398, -42.709), Vector(0.011, -0.117, -0.993), 172.872, 0, 1), Array(240.825, True,
+		Vector(-92.710, 5.857, -71.197), Vector(-0.762, -0.233, -0.604), 500, 0, 2), Array(235.825, True, Vector(-84.658, 4.978,
+		-63.876), Vector(0.884, -0.137, 0.447), 500, 0, 8), Array(230.825, True, Vector(-68.225, 4.898, -46.599), Vector(0.997, 0.057,
+		0.053), 500, 0, 0), Array(225.825, True, Vector(-57.213, 3.854, -53.291), Vector(0.873, 0.368, -0.320), 377.500, 0, 4), Array(
+		220.825, True, Vector(-69.248, 4, -54.541), Vector(0.371, -0.181, -0.911), 375.083, 0, 4), Array(215.824, True, Vector(-58.667,
+		3.852, -49.576), Vector(0.992, -0.000, 0.130), 431.610, 0, 8), Array(210.824, True, Vector(-55.419, 5.329, -48.155), Vector(
+		-0.511, -0.014, -0.860), 481.530, 0, 4), Array(205.824, True, Vector(-58.113, 4.759, -48.472), Vector(0.970, 0.045, 0.239),
+		408.200, 0, 2), Array(200.823, True, Vector(-72.430, 3.850, -49.922), Vector(0.969, 0.000, 0.248), 203.776, 0, 8), Array(
+		195.823, True, Vector(-71.052, 4.513, -54.244), Vector(0.386, 0.047, -0.921), 134.056, 0, 2), Array(190.823, True, Vector(
+		-66.464, 4.143, -56.677), Vector(0.225, -0.060, 0.973), 97.176, 0, 4), Array(240.825, True, Vector(-106.084, 4, -80.194),
+		Vector(0.801, -0.017, 0.598), 200, 0, 1), Array(235.825, True, Vector(-92.115, 4.125, -63.920), Vector(0.961, 0.002, -0.275),
+		200, 0, 1), Array(230.825, True, Vector(-82.576, 3.852, -46.572), Vector(0.984, 0.018, -0.175), 200, 0, 3), Array(225.825,
+		True, Vector(-77.591, 3.852, -51.681), Vector(0.928, -0.048, 0.371), 200, 0, 3), Array(220.825, True, Vector(-66.711, 4.373,
+		-62.656), Vector(-0.696, -0.254, -0.672), 151.912, 0, 3), Array(215.824, False, Vector(-52.602, 6, -77.908), Vector(-0.999,
+		-0.003, 0.046), 0, 0, 0), Array(210.824, False, Vector(-52.602, 6, -77.908), Vector(-1.000, -0.016, 0.007), 0, 0, 0), Array(
+		205.824, True, Vector(-107.465, 4, -75.599), Vector(0.882, -0.022, 0.470), 200, 0, 0), Array(200.823, True, Vector(-87.151, 4,
+		-64.644), Vector(1.000, -0.001, -0.025), 200, 0, 0), Array(195.823, True, Vector(-67.960, 3.850, -51.790), Vector(-0.971,
+		-0.083, 0.224), 139.352, 0, 3), Array(190.823, False, Vector(-60.940, 3.850, -51.627), Vector(0.936, -0.104, 0.338), 0, 0, 0),
+		Array(240.825, True, Vector(-106.614, 4, -81.785), Vector(0.809, 0.006, 0.588), 200, 0, 1), Array(235.825, True, Vector(
+		-92.734, 4, -64.930), Vector(0.760, -0.018, 0.650), 200, 0, 3), Array(230.825, True, Vector(-81.372, 3.852, -49.760), Vector(
+		0.901, 0.071, 0.428), 200, 0, 1), Array(225.825, True, Vector(-76.597, 3.850, -54.052), Vector(0.999, -0.021, 0.031), 200, 0,
+		1), Array(220.825, True, Vector(-62.500, 4, -45.504), Vector(0.967, 0.024, -0.254), 200, 0, 1), Array(215.824, True, Vector(
+		-53.885, 3.947, -31.454), Vector(0.908, 0.098, -0.406), 172.480, 0, 0), Array(210.824, True, Vector(-55.580, 3.948, -37.196),
+		Vector(-0.324, 0.176, -0.930), 187.840, 0, 0), Array(205.824, True, Vector(-64.189, 3.852, -52.737), Vector(0.836, -0.130,
+		0.533), 200, 0, 0), Array(200.823, True, Vector(-72.214, 4.001, -44.606), Vector(0.785, 0.377, -0.491), 200, 0, 10), Array(
+		195.823, False, Vector(-71.008, 3.852, -52.269), Vector(0.559, 0.025, -0.828), 0, 0, 0), Array(190.823, False, Vector(-71.008,
+		3.852, -52.269), Vector(0.604, 0.033, -0.797), 0, 0, 0), Array(240.825, True, Vector(-68.318, 3.852, -50.889), Vector(-0.854,
+		0.028, -0.520), 200, 0, 1), Array(235.825, True, Vector(-73.102, 3.852, -49.117), Vector(-0.704, 0.032, -0.709), 200, 0, 1),
+		Array(230.825, False, Vector(-69.178, 4.001, -43.479), Vector(-0.531, 0.045, -0.846), 0, 0, 0), Array(225.825, False, Vector(
+		-69.178, 4.001, -43.479), Vector(-0.529, 0.064, -0.846), 0, 0, 0), Array(220.825, True, Vector(61.330, 4, -66.615), Vector(
+		-0.883, -0.024, 0.468), 200, 0, 3), Array(215.824, True, Vector(25.390, 5.974, -65.555), Vector(-0.863, -0.000, 0.505), 200, 0,
+		1), Array(210.824, True, Vector(-2.435, 6, -58.440), Vector(-0.861, -0.007, 0.509), 200, 0, 1), Array(205.824, True, Vector(
+		-31.958, 5.844, -64.136), Vector(-0.627, -0.024, 0.779), 200, 0, 0), Array(200.823, True, Vector(-46.313, 5.574, -54.379),
+		Vector(-0.964, -0.069, 0.257), 200, 0, 1), Array(195.823, True, Vector(-55.646, 4.025, -47.532), Vector(-0.924, 0.099, -0.369),
+		200, 0, 5), Array(190.823, True, Vector(-55.646, 4.025, -47.532), Vector(-0.759, -0.051, -0.649), 200, 0, 4))), Array(Array(0,
+		Array(240.966, True, Vector(-109.796, 4, -78.604), Vector(0.707, -0.003, 0.708), 600, 0, 0), Array(235.965, True, Vector(
+		-67.823, 4.569, -52.779), Vector(0.676, -0.124, 0.726), 600, 0, 9), Array(230.965, True, Vector(1.460, 6, -73.297), Vector(
+		0.869, -0.305, -0.389), 600, 0, 0), Array(224.965, True, Vector(21.745, 5.972, -71.656), Vector(-0.855, -0.016, -0.519), 600,
+		0, 1), Array(219.964, True, Vector(-18.418, 5.851, -82.739), Vector(-0.517, -0.088, 0.851), 600, 0, 9), Array(214.964, True,
+		Vector(-47.023, 8.976, -46.882), Vector(-0.929, -0.367, 0.049), 599.675, 0, 0), Array(0.026, True, Vector(-61.313, 4, -43.757),
+		Vector(0.717, -0.128, -0.685), 600, 0, 0), Array(0.034, True, Vector(-58.518, 4.582, -48.969), Vector(0.884, -0.203, -0.421),
+		600, 0, 0)), 0, 0, 0, 0, 0, Array(0, Array(240.966, True, Vector(-108.735, 4, -79.664), Vector(0.715, -0.005, 0.699), 200, 0,
+		0), Array(235.965, True, Vector(-80.582, 4, -63.063), Vector(0.772, -0.089, 0.629), 200, 0, 4), Array(230.965, True, Vector(
+		-49.362, 5.065, -52.744), Vector(0.955, -0.132, -0.267), 200, 0, 0), Array(224.965, True, Vector(-34.418, 6.828, -65.926),
+		Vector(0.991, 0.001, 0.133), 200, 0, 0), Array(219.964, True, Vector(-34.512, 5.848, -63.931), Vector(-0.496, -0.151, 0.855),
+		200, 0, 4), Array(214.964, True, Vector(-43.746, 10.323, -47.802), Vector(-0.966, -0.238, 0.106), 200, 0, 0), Array(0.026,
+		True, Vector(-48.744, 5.990, -56.642), Vector(0.173, -0.058, 0.983), 200, 0, 0), Array(0.034, True, Vector(-60.652, 4,
+		-46.380), Vector(0.444, 0.033, -0.895), 200, 0, 0), Array(240.966, True, Vector(64.896, 4, -64.987), Vector(-1, 0, 0), 500, 0,
+		0), Array(235.965, True, Vector(64.896, 4, -64.987), Vector(-1, 0, 0), 500, 0, 0), Array(230.965, True, Vector(64.896, 4,
+		-64.987), Vector(-1, 0, 0), 500, 0, 0), Array(224.965, True, Vector(55.351, 4.077, -67.836), Vector(-1, 0, 0), 500, 0, 0),
+		Array(219.964, True, Vector(46.856, 6.008, -63.885), Vector(-1, 0, 0), 500, 0, 0), Array(214.964, True, Vector(46.856, 6.008,
+		-63.885), Vector(-1, 0, 0), 500, 0, 0), Array(0.026, True, Vector(43.029, 6.607, -63.377), Vector(-0.999, -0.005, -0.037), 500,
+		0, 4), Array(0.034, True, Vector(16.229, 6.957, -62.870), Vector(-0.986, -0.157, 0.049), 500, 0, 4), Array(240.966, True,
+		Vector(63.416, 4, -63.929), Vector(-0.332, 0.006, -0.943), 200, 0, 1), Array(235.965, True, Vector(31.248, 6, -64.021), Vector(
+		-0.029, 0.010, -1.000), 200, 0, 1), Array(230.965, True, Vector(4.034, 6, -55.646), Vector(-0.985, -0.005, 0.172), 200, 0, 1),
+		Array(224.965, True, Vector(-13.754, 6.074, -64.103), Vector(-0.996, 0.065, -0.063), 131.408, 0, 7), Array(219.964, True,
+		Vector(-36.831, 5.850, -59.455), Vector(0.700, 0.412, -0.583), 124.576, 0, 3), Array(214.964, True, Vector(-61.788, 4.021,
+		-42.007), Vector(-0.454, 0.013, -0.891), 13.384, 0, 1), Array(0.026, False, Vector(-61.788, 4.021, -42.007), Vector(0.002,
+		-0.687, 0.727), 0, 0, 0), Array(0.034, False, Vector(-61.788, 4.021, -42.007), Vector(-0.060, -0.753, 0.655), 0, 0, 0), Array(
+		240.966, True, Vector(63.249, 4, -67.111), Vector(-0.999, 0.026, -0.032), 200, 0, 3), Array(235.965, True, Vector(32.022,
+		6.064, -65.070), Vector(-0.998, -0.023, -0.064), 200, 0, 1), Array(230.965, True, Vector(6.587, 6, -55.706), Vector(-0.418,
+		0.008, -0.908), 200, 0, 1), Array(224.965, True, Vector(-21.503, 6.025, -65.636), Vector(-0.980, -0.092, -0.174), 200, 0, 0),
+		Array(219.964, True, Vector(-43.479, 6, -55.637), Vector(0.741, 0.098, -0.664), 200, 0, 0), Array(214.964, True, Vector(
+		-54.038, 4.277, -50.224), Vector(0.822, 0.532, 0.204), 200, 0, 4), Array(0.026, True, Vector(-47.069, 4.278, -45.705), Vector(
+		0.434, -0.051, -0.900), 184.842, 0, 0), Array(0.034, False, Vector(-60.428, 3.948, -40.143), Vector(0.137, -0.004, -0.991), 0,
+		0, 0), Array(240.966, True, Vector(-108.205, 4, -78.073), Vector(0.829, 0.009, 0.559), 200, 0, 1), Array(235.965, True, Vector(
+		-95.504, 4, -67.504), Vector(1.000, 0.008, 0.026), 200, 0, 3), Array(230.965, True, Vector(-79.596, 3.850, -52.409), Vector(
+		0.999, 0.018, -0.029), 200, 0, 1), Array(224.965, True, Vector(-76.910, 3.850, -51.119), Vector(0.961, 0.021, -0.277), 200, 0,
+		1), Array(219.964, True, Vector(-70.925, 3.850, -52.143), Vector(0.991, 0.090, -0.100), 200, 0, 5), Array(214.964, True,
+		Vector(-71.274, 3.850, -54.532), Vector(0.685, -0.003, 0.729), 200, 0, 1), Array(0.026, True, Vector(-50.097, 4.890, -54.248),
+		Vector(0.285, -0.077, 0.955), 200, 0, 1), Array(0.034, True, Vector(-58.646, 3.850, -52.794), Vector(0.994, 0.014, -0.109),
+		200, 0, 1))));
+	Global.events = Array(Array(Array(0, 1, 3, 1, 2, 0, 0, 0, 3, 3, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 3, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1,
+		0, 1, 1, 0, 3, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 3, 0), Array(30.183, 30.463, 30.527, 31.231, 31.519, 31.519, 34.207, 34.591,
+		34.591, 34.623, 34.623, 34.879, 35.263, 35.615, 35.647, 35.031, 35.415, 35.799, 35.959, 35.959, 36.151, 36.151, 36.247, 36.631,
+		36.015, 36.399, 36.783, 37.167, 37.423, 37.423, 37.551, 37.743, 37.743, 37.031, 37.415, 37.671, 37.671, 37.799, 38.183, 38.567,
+		38.951, 38.335, 38.687, 38.719, 38.751, 39.103, 39.487, 39.871, 39.095, 39.095), Array(Custom String("dj 2"), Custom String(
+		"dj"), Custom String("exǃ"), Custom String("dj"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("exǃ"), Custom String("exǃ")), Array(Custom String("dj"), Custom String("dj"), Custom String("dj"),
+		Custom String("dj"), Custom String("dj"), Custom String("dj"), Custom String("exǃ"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker")), Array(4.800,
+		1.378, Vector(0.557, 0.000, 0.831), 1.182, 197.760, 197.760, 30, 85, Vector(-0.655, 0.005, -0.756), Vector(-0.810, -0.413,
+		0.415), 2.500, 2.640, 2.880, 30, 3.120, 2.640, 3.120, 2.880, 1.200, 30, 75, Vector(-0.062, 0.005, -0.998), 2.160, 2.880, 3.120,
+		2.880, 2.880, 2.640, 75, Vector(-0.153, 0.005, -0.988), 2.880, 1.680, 30, 2.160, 3.120, 37.129, Vector(0.461, 0.117, -0.880),
+		2.880, 2.640, 3.120, 2.640, 2.880, 2.500, 3.120, 2.500, 2.880, 2.880, 2.880, Vector(0.016, 0.005, -1.000), 85), Array(1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 3, 0, 1,
+		1, 1, 1, 1, 1), Array(39.255, 39.255, 39.351, 39.639, 39.639, 39.735, 40.023, 40.023, 40.119, 40.407, 40.407, 40.503, 40.791,
+		40.791, 40.887, 40.175, 40.175, 40.271, 40.559, 40.559, 40.655, 40.815, 40.815, 40.911, 40.943, 40.975, 41.071, 41.135, 41.295,
+		41.327, 41.327, 41.391, 41.455, 41.583, 41.711, 41.903, 41.095, 41.095, 41.095, 41.095, 41.191, 41.351, 41.351, 41.351, 41.479,
+		41.479, 41.863, 41.863, 42.247, 42.247), Array(Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin")), Array(Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("exǃ"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("exǃ"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Protowalker")), Array(2.880, 2.880, 10.560, 2.880, 2.880, 10.560, 2.880, 2.880,
+		10.560, 2.880, 2.880, 10.560, 2.640, 2.880, 10.560, 3.120, 2.880, 10.560, 2.880, 2.880, 1.480, 1.600, 5, 5, 2.880, 5, 5, 5, 5,
+		2.880, 1.536, 5, 10, 1.536, 2.880, 8.800, 2.880, 2.880, 5, 1.536, 5, 1.216, Vector(-0.974, 0.005, 0.225), 85, 2.880, 2.880,
+		2.640, 2.880, 3.120, 2.880), Array(1, 1, 0, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0, 1, 1, 1,
+		1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1), Array(42.631, 42.631, 42.791, 43.015, 43.015, 42.175, 42.175, 42.399,
+		42.399, 42.399, 42.655, 42.783, 42.783, 43.039, 43.039, 43.167, 43.167, 43.167, 43.423, 43.423, 43.551, 43.551, 43.807, 43.935,
+		43.935, 43.959, 44.431, 44.431, 44.495, 44.495, 44.719, 44.879, 44.879, 45.039, 45.103, 45.263, 45.263, 45.487, 45.647, 45.647,
+		45.743, 45.871, 45.903, 45.999, 45.031, 45.031, 45.063, 45.159, 45.223, 45.255), Array(Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin")), Array(Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"cybermonk"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
+		"exǃ"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("exǃ"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin")), Array(2.640, 2.880, 5, 3.120, 2.880,
+		Vector(0.529, 0.006, 0.848), 90, 2.880, 2.880, 1.216, 1.408, 2.880, 2.880, Vector(-0.106, 0.085, -0.991), 50, 2.640, 2.880,
+		1.536, 1.536, 0.448, 3.120, 2.880, 2.416, 1.200, 1.200, 1.248, Vector(-0.862, -0.130, 0.490), 70, 1.920, 3.120, 2.160, 1.920,
+		2.640, 5, 3.120, 1.920, 3.120, 2.880, 1.920, 2.880, 5, 2.880, 5, 5, 1.920, 2.640, 5, 5, 5, 2.640), Array(0, 0, 1, 1, 0, 0, 0,
+		1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1), Array(45.319, 45.383, 45.415, 45.415, 45.447, 45.479, 45.543, 45.639, 45.639, 45.703, 45.799, 45.799, 45.799, 45.862,
+		45.958, 46.022, 46.022, 46.118, 46.182, 46.182, 46.182, 46.246, 46.342, 46.342, 46.406, 46.566, 46.790, 46.174, 46.334, 46.558,
+		46.942, 47.102, 47.326, 47.710, 47.870, 47.030, 47.094, 47.478, 47.638, 47.862, 48.246, 48.406, 48.630, 49.014, 48.174, 48.398,
+		48.782, 48.942, 49.166, 49.550), Array(Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("dj 2"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("0"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Provoxin"), Custom String("Provoxin")), Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
+		"Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin")), Array(5, 5, 1.920, 2.880, 13.800, 5, 5, 3.120, 5, 5, 10, 1.920, 3.120, 5, 5, 2.880, 5, 5, 5, 1.920, 2.880,
+		13.800, 0.112, 0.112, 2.880, 1.477, 2.880, 2.640, 1.182, 3.120, 2.880, 1.182, 2.880, 2.880, 1.182, 63.800, 2.880, 2.880, 1.182,
+		2.640, 3.120, 1.182, 2.640, 2.880, 1.182, 2.880, 2.880, 1.182, 2.880, 3.120), Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1), Array(49.710,
+		49.934, 49.318, 49.478, 49.702, 50.086, 50.246, 50.470, 50.854, 51.014, 50.238, 50.622, 50.782, 51.550, 51.318, 52.086, 52.854,
+		52.238, 52.622, 53.006, 53.390, 53.454, 53.454, 53.774, 53.158, 53.542, 53.670, 53.734, 53.830, 53.894, 53.926, 53.990, 54.054,
+		54.310, 54.310, 54.374, 54.470, 54.534, 54.694, 54.694, 54.694, 54.694, 54.790, 54.822, 54.854, 55.014, 54.078, 54.110, 54.174,
+		54.206), Array(Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("dj 2"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin")),
+		Array(Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("exǃ"), Custom String("dj 2"),
+		Custom String("exǃ"), Custom String("dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("dj 2"), Custom String("exǃ"), Custom String("Protowalker"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Protowalker")), Array(1.182, 2.880,
+		2.880, 1.182, 2.640, 3.120, 1.182, 2.880, 2.880, 1.182, 2.640, 1.440, 1.182, 1.182, 1.182, 1.182, 1.182, 1.600, 1.182, 1.536,
+		1.182, 58.123, Vector(-0.235, -0.305, 0.923), 1.536, 1.182, 1.536, 2.500, 2.500, 2.500, 2.500, 1.182, 2.500, 2.500, 2.500,
+		1.472, 2.500, 2.500, 2.500, 2.500, Vector(-0.770, 0.005, -0.638), 70, 1.182, 2.500, 10.560, 2.500, 2.500, 1.536, 2.500, 2.500,
+		10.560), Array(0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 3, 1, 3, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 3, 0, 0, 0, 0, 1, 0, 1, 0,
+		1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0), Array(54.270, 54.334, 54.430, 54.462, 54.494, 54.590, 54.846, 54.846, 54.910, 55.134,
+		55.166, 55.166, 55.230, 55.582, 55.582, 55.614, 55.382, 56.150, 56.918, 56.686, 57.454, 57.678, 57.710, 57.774, 57.870, 57.934,
+		57.966, 57.966, 57.030, 57.030, 57.030, 57.094, 57.190, 57.222, 57.254, 57.350, 57.350, 57.350, 57.414, 57.510, 57.574, 57.734,
+		57.734, 57.830, 57.990, 57.990, 58.054, 58.118, 58.118, 58.182), Array(Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
 		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin")), Array(Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("dj 2"), Custom String("exǃ"), Custom String("Protowalker"), Custom String("exǃ"),
 		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("exǃ"),
+		Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("exǃ")), Array(2.500, 2.500, 2.500, 1.182, 2.500,
+		10.560, 1.600, 5.280, 2, 2, 3.125, Vector(0.214, 0.282, -0.935), 1.169, Vector(0.163, 0.005, 0.987), 70, 1.536, 1.536, 1.536,
+		1.536, 1.472, 1.600, 30, 2.500, 2.500, 2.500, 2.500, 2.400, 2.400, Vector(-0.898, -0.211, -0.386), 2.500, 2.500, 2.500, 2.500,
+		1.472, 2.500, 2.880, 2.500, 2.880, 2.500, 2.500, 2.500, 2.880, 2.880, 2.500, 2.500, 1.536, 2.500, 2.880, 2.880, 30), Array(0,
+		1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		3, 0, 1, 1, 1, 0, 3), Array(58.470, 58.502, 58.502, 58.534, 58.630, 58.694, 58.758, 58.886, 58.886, 58.270, 58.494, 58.494,
+		58.526, 58.782, 59.166, 59.294, 59.550, 59.550, 59.934, 59.062, 59.286, 59.286, 59.318, 59.701, 59.829, 60.085, 60.469, 60.597,
+		60.853, 60.237, 60.365, 60.621, 60.621, 61.005, 61.005, 61.133, 61.389, 61.389, 61.773, 61.773, 61.901, 61.157, 61.157, 61.285,
+		61.285, 61.669, 62.053, 62.437, 62.693, 62.693), Array(Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2")), Array(Custom String("exǃ"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("Protowalker"), Custom String(
+		"exǃ"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("exǃ"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"),
 		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("exǃ"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Protowalker"), Custom String("Protowalker")),
+		Array(2.500, 2.880, 2.880, 5, 2.500, 5, 1.600, 1.480, 2.880, 2.880, 30, 1.680, 1.536, 2.400, 2.880, 1.472, 30, 2.880, 2.880,
+		1.536, 45, Vector(-0.893, 0.053, -0.446), 2.880, 2.880, 1.600, 2.880, 2.880, 1.472, 2.880, 2.880, 1.600, 2.880, 9.680, 2.880,
+		10.560, 1.536, 2.880, 10.560, 2.880, 10.560, 1.536, 2.880, 4.725, Vector(-0.981, 0.001, -0.193), 70, 1.472, 2.208, 2.496,
+		3.125, Vector(0.355, 0.650, -0.672)), Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+		0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1), Array(62.725, 62.821, 62.077, 62.205, 62.589, 62.973,
+		63.357, 63.741, 63.125, 63.125, 63.125, 63.509, 63.509, 63.893, 63.893, 63.957, 64.021, 64.117, 64.149, 64.181, 64.277, 64.277,
+		64.277, 64.277, 64.341, 64.341, 64.437, 64.501, 64.533, 64.661, 64.661, 64.725, 64.757, 64.821, 64.917, 64.045, 64.045, 64.429,
+		64.429, 64.813, 64.813, 65.197, 65.261, 65.357, 65.421, 65.485, 65.581, 65.581, 65.581, 65.677), Array(Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("dj"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("dj"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("Provoxin")), Array(Custom String("Protowalker"), Custom String("exǃ"), Custom String("Protowalker"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("dj 2"), Custom String("dj 2"), Custom String("exǃ"), Custom String("dj 2"), Custom String("exǃ"),
+		Custom String("dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("dj 2"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("dj 2"), Custom String("dj 2"), Custom String("exǃ"),
+		Custom String("dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"dj 2"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("dj 2"), Custom String("exǃ"), Custom String("dj 2"), Custom String("exǃ"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("exǃ"), Custom String("dj 2"), Custom String("Provoxin")), Array(2.880, 2.704, 0.245, 2.496, 2.496, 2.496, 2.288,
+		2.704, 2.288, 35, 1.920, 2.704, 1.920, 2.496, 1.920, 5, 5, 5, 35, 5, 4, 2.288, 10, 1.920, 35, 10, 5, 5, 4, 2.704, 1.920, 4, 5,
+		5, 5, 2.288, 1.920, 2.496, 1.920, 2.208, 1.477, 5, 5, 5, 5, 4, 8.800, 1.600, 1.182, 1.680), Array(0, 1, 1, 1, 1, 0, 1, 0, 0, 1,
+		0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 3, 1, 0, 0, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 0), Array(
+		65.677, 65.965, 65.349, 65.349, 65.349, 65.509, 65.637, 65.701, 65.701, 65.733, 65.797, 65.797, 65.861, 65.957, 66.021, 66.117,
+		66.117, 66.117, 66.117, 66.181, 66.405, 66.501, 66.501, 66.597, 66.789, 66.885, 66.885, 66.885, 66.885, 66.981, 66.981, 67.013,
+		67.013, 66.237, 66.269, 66.301, 66.557, 66.557, 66.557, 66.557, 66.653, 66.685, 67.037, 67.421, 67.517, 67.709, 67.805, 67.189,
+		67.573, 67.797), Array(Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin")),
+		Array(Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"), Custom String("dj 2"),
 		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker")), Array(
-		2.560, 7.680, 7.680, 2.080, 2.560, 7.680, 7.680, 2.080, 2.560, 7.680, 7.680, 2.080, 8.800, 3.072, 8.800, 9.216, 9.216, 8.800,
-		2.496, 13.800, 13.800, 3.072, 9.216, 13.800, 9.216, 2.496, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800, 13.800,
-		13.800, 3.072, 9.216, 9.216, 2.496, 13.800, 3.072, 5, 5, 5, 5, 9.216, 13.800, 9.216, 2.496, 13.800)), Array(Array(0, 0, 0, 1,
-		1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0,
-		0, 0, 0, 0), Array(59.318, 59.382, 60.150, 60.374, 60.758, 60.950, 61.014, 60.078, 60.142, 60.174, 60.238, 60.846, 60.910,
-		60.942, 61.006, 61.070, 61.325, 61.709, 61.997, 61.061, 61.093, 61.157, 61.221, 62.693, 62.429, 62.493, 62.493, 62.589, 62.653,
-		63.293, 63.549, 63.933, 63.093, 63.317, 63.893, 64.181, 64.405, 64.469, 64.469, 64.565, 64.661, 64.853, 64.949, 64.205, 64.237,
-		64.269, 64.365, 64.429, 64.493, 64.493), Array(Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana 2")), Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("cybermonk"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("exǃ"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("Protowalker"),
+		Custom String("dj 2"), Custom String("exǃ"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("exǃ"),
+		Custom String("Protowalker"), Custom String("exǃ"), Custom String("exǃ"), Custom String("cybermonk"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("cybermonk")), Array(35, 2.160, 3.120, 1.536,
+		1.182, 2, 2, 2, 5, 1.840, 5, 35, 5, 2, 2.880, 1.536, 1.680, 1.536, 1.182, 2, 2.880, 2.640, 5, 10, 0.240, 1.472, 2.880, 1.536,
+		1.182, 3.125, Vector(0.692, 0.025, -0.722), 1.680, 35, 2, 2.880, 2.400, 4.643, 1.344, 1.280, 4.643, 2.880, 1.045, 2.880, 3.120,
+		35, 35, 2.880, 2.880, 2.880, 35), Array(0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1,
+		1, 1, 1, 1, 0, 3, 0, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1), Array(67.957, 67.957, 68.021, 68.085, 68.085, 68.341, 68.469,
+		68.469, 68.725, 68.853, 68.853, 68.917, 68.949, 68.109, 68.109, 68.237, 68.237, 68.333, 68.493, 68.589, 68.621, 68.717, 68.877,
+		69.005, 69.005, 69.101, 69.101, 69.261, 69.389, 69.389, 69.645, 69.773, 69.773, 69.997, 69.997, 69.029, 69.029, 69.157, 69.157,
+		69.253, 69.253, 69.253, 69.541, 69.541, 69.925, 69.925, 70.117, 70.309, 70.309, 70.693), Array(Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("dj"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"), Custom String("cybermonk"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin")), Array(Custom String("Provoxin"),
+		Custom String("exǃ"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String(
+		"exǃ"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("exǃ"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("exǃ"),
+		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("exǃ"), Custom String(
+		"Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("exǃ"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("exǃ"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("exǃ"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker")), Array(8.800,
+		2.640, 95, 2.400, 2.400, 2.880, 2.640, 2.880, 3.120, 3.120, 2.880, 4, 35, 2.640, 4, 0.640, 2.880, 4, 2.880, 4, 2.880, 6.500,
+		3.120, 2.640, 2.880, 0.960, 35, 2.880, 2.400, 2.880, 2.880, 0.500, 2.880, 4, Vector(0.010, -0.001, 1.000), 6.500, 2.880, 3.120,
+		2.880, 27.792, 1.440, 27.792, 2.640, 2.880, 3.120, 2.880, 1.280, 0.340, 2.880, 2.880), Array(1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 3, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), Array(
+		70.077, 70.461, 70.845, 71.069, 71.229, 71.453, 71.613, 71.709, 71.709, 71.837, 71.997, 71.997, 71.189, 71.221, 71.381, 71.765,
+		72.149, 72.533, 72.597, 72.597, 72.597, 72.725, 72.885, 72.269, 72.493, 72.653, 73.037, 73.261, 73.421, 73.805, 73.029, 73.189,
+		73.573, 73.957, 74.916, 74.980, 74.076, 74.140, 74.236, 74.300, 74.396, 74.460, 74.556, 74.780, 74.876, 74.940, 75.196, 75.420,
+		75.580, 75.676), Array(Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker")), Array(Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"exǃ"), Custom String("Provoxin"), Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"),
+		Custom String("exǃ")), Array(2.880, 2.880, 2.880, 9.680, 2.880, 10.560, 2.880, 45, Vector(0.484, 0.014, 0.875), 10.560, 3.120,
+		2.880, 1.280, 9.960, 2.880, 2.880, 2.640, 3.120, Vector(-0.014, -0.132, -0.991), 0.480, 70, 1.472, 2.160, 3.120, 1.600, 2.880,
+		2.640, 1.536, 2.880, 2.880, 1.536, 3.120, 2.640, 0.136, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5), Array(0, 0, 0, 0, 2,
+		0, 1, 1, 1), Array(75.740, 75.836, 75.900, 75.156, 75.156, 75.412, 75.412, 75.796, 76.180), Array(Custom String("Protowalker"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
+		Custom String("exǃ"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin")), Array(Custom String(
+		"exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("exǃ"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin")), Array(5, 5, 5, 2.176, 2.176, 95, 2.880,
+		2.880, 3.120)), Array(Array(3, 0, 1, 1, 1, 1, 0, 1, 3, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1), Array(102.523, 102.523, 103.707, 103.474, 104.242, 105.010, 104.330,
+		104.330, 104.330, 104.330, 104.618, 104.618, 104.778, 104.874, 105.002, 105.002, 105.034, 105.386, 105.386, 105.546, 105.674,
+		105.770, 105.770, 105.802, 105.154, 105.154, 105.314, 105.538, 105.538, 105.570, 105.922, 105.922, 106.082, 106.306, 106.306,
+		106.338, 106.690, 106.850, 106.946, 106.074, 106.074, 106.106, 106.458, 106.458, 106.618, 106.842, 107.226, 107.386, 107.386,
+		107.154), Array(Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2")),
+		Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk")), Array(Vector(0.985, 0.013, 0.173), 70, 1.408, 1.536,
+		1.536, 1.536, 3.750, 0.480, Vector(-0.809, -0.035, -0.587), 35, 2.160, 2.880, 1.536, 8.800, 3.120, 2.880, 1.182, 2.880, 2.880,
+		1.536, 8.800, 2.880, 2.880, 1.182, 2.640, 2.880, 1.536, 3.120, 2.880, 1.182, 2.880, 2.880, 1.536, 1.190, 2.880, 1.182, 2.640,
+		1.536, 8.800, 3.120, 3.120, 1.182, 2.640, 0.292, 1.536, 2.880, 0.160, 1.536, 35, 1.536), Array(0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0,
+		0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 3, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0), Array(
+		107.250, 107.442, 107.826, 107.922, 108.210, 108.594, 108.690, 108.978, 108.458, 108.810, 109.034, 109.066, 109.066, 109.226,
+		109.258, 109.450, 109.482, 109.610, 109.834, 109.866, 109.994, 109.218, 109.378, 109.378, 109.570, 109.762, 109.954, 110.146,
+		110.338, 110.466, 110.530, 110.722, 110.914, 110.042, 110.042, 110.106, 110.298, 110.490, 110.682, 111.066, 111.450, 111.706,
+		111.834, 111.218, 111.602, 111.986, 112.370, 112.754, 112.202, 112.394), Array(Custom String("cybermonk"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj"), Custom String("dj"),
+		Custom String("Provoxin"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("Provoxin"), Custom String(
+		"dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2")), Array(Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String(
+		"cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
 		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker")), Array(10, 5, 13.800, 7.800, 7.200, 13.800,
-		5, 5, 3.750, 5, 5, 5, 5, 2.880, 10, 10, 2.880, 2.880, 5, 5, 1.360, 5, 5, 13.800, 10, 13.800, 10, 5, 5, 13.800, 7.800, 7.200,
-		13.800, 3.750, 13.800, 7.800, 5, 2.880, 5, 7.200, 13.800, 2.880, 3.750, 5, 2.880, 5, 5, 5, 13.800, 3.072)), Array(Array(1, 0,
-		0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 3, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0,
-		0, 0, 0, 0, 0, 0), Array(64.621, 64.749, 64.813, 64.877, 64.909, 65.005, 65.261, 65.389, 65.581, 65.773, 65.157, 65.349,
-		65.541, 65.925, 66.149, 66.309, 66.341, 66.341, 66.693, 66.757, 66.821, 66.917, 66.981, 66.077, 66.461, 66.557, 66.813, 66.845,
-		66.877, 66.973, 67.037, 67.229, 67.741, 67.805, 67.901, 67.965, 67.125, 68.213, 68.597, 68.917, 68.981, 68.589, 68.589, 69.389,
-		69.869, 69.125, 70.461, 70.845, 71.229, 71.549), Array(Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
 		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")), Array(Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("ana"), Custom String("ana"), Custom String("ana"), Custom String("ana")), Array(2.880, 5, 5,
-		9.216, 5, 2.880, 9.216, 2.880, 2.496, 2.880, 2.880, 13.800, 2.880, 2.880, 13.800, 2.880, 9.600, Vector(-0.916, -0.167, 0.365),
-		2.880, 5, 5, 5, 5, 2.880, 2.880, 13.800, 5, 2.880, 5, 5, 5, 1.800, 5, 5, 5, 5, 13.800, 7.800, 7.200, 25, 3.750, 25, 15, 5, 5,
-		5, 3.072, 9.216, 9.216, 2.496)), Array(Array(0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 3, 1, 1, 0, 0, 0, 3,
-		0, 0, 3, 3, 0, 1, 0, 1, 1, 0, 1, 1, 0, 3, 1, 1, 0, 1, 1, 1, 1, 1, 0), Array(71.093, 71.157, 71.477, 71.541, 71.861, 71.925,
-		72.181, 72.693, 72.077, 72.461, 72.557, 72.781, 72.941, 73.325, 73.549, 73.933, 73.317, 73.637, 74.821, 74.949, 74.949, 74.205,
-		74.589, 75.005, 75.069, 75.325, 75.485, 75.485, 75.549, 75.549, 75.868, 75.868, 75.412, 75.700, 75.796, 76.180, 77.516, 77.676,
-		77.060, 77.252, 77.252, 77.444, 79.004, 79.036, 79.388, 79.612, 79.772, 79.996, 79.188, 79.188), Array(Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana"), Custom String("cybermonk"), Custom String(
-		"ana"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana")), Array(
-		Custom String("ana"), Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk")), Array(3.072, 11.700, 9.216, 10.800, 9.216, 5.625,
-		2.496, 2.560, 7.680, 7.680, 11.700, 2.080, 7.200, 3.750, 2.560, 7.680, 7.680, 2.080, 7.800, 8, Vector(-0.676, 0.000, 0.737),
-		7.200, 3.750, 5, 5, 13.800, Vector(-0.795, -0.001, 0.607), 9.600, 8, Vector(-0.491, 0, 0.871), Vector(0.615, -0.001, -0.788),
-		30, 7.800, 13.800, 7.200, 3.750, 11.500, 7.800, 7.200, 8, Vector(0.268, 0.000, -0.963), 3.750, 7.800, 13.800, 7.200, 7.800,
-		3.750, 7.200, 25, 15)), Array(Array(1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0), Array(79.188, 79.284, 81.476, 81.860, 82.020, 82.244, 82.404,
-		82.564, 82.660, 82.660, 82.756, 82.788, 82.044, 82.108, 82.140, 82.428, 82.524, 82.812, 82.908, 83.132, 83.292, 83.676, 83.868,
-		83.060, 83.252, 83.444, 83.636, 83.828, 83.956, 84.180, 84.212, 84.596, 84.980, 84.364, 84.748, 85.132, 85.516, 85.900, 85.284,
-		85.540, 87.412, 87.796, 88.052, 88.180, 88.788, 89.452, 91.579, 91.579, 91.867, 91.251), Array(Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana"), Custom String("ana 2"), Custom String("ana"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2")), Array(Custom String("ana"), Custom String("Protowalker"), Custom String(
+		Custom String("Protowalker")), Array(8.800, 2.640, 2.880, 1.536, 2.880, 0.400, 1.536, 35, 1.536, 4, 4, 35, 2.880, 1.536, 4,
+		2.640, 1.292, 1.488, 3.120, 1.920, 2.496, 0.148, 6.500, 2.496, 2.880, 2.496, 3.120, 2.496, 0.500, 6.500, 2.496, 2.880, 2.496,
+		Vector(-0.777, 0.018, 0.630), 50, 2.880, 2.496, 0.740, 2.496, 2.496, 2.496, 2, 2.496, 2.496, 2.496, 2.496, 2.496, 1.200, 2, 2),
+		Array(0, 3, 1, 0, 0, 0, 0, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 3, 1, 1, 1, 1, 0,
+		1, 1, 0, 1, 0, 1, 0, 1, 0, 0), Array(112.458, 112.522, 112.522, 112.522, 112.650, 112.778, 112.778, 112.778, 112.778, 112.810,
+		112.810, 113.194, 113.194, 113.290, 113.578, 113.962, 113.058, 113.346, 113.826, 114.594, 114.074, 114.266, 114.362, 114.650,
+		115.034, 115.130, 115.898, 115.058, 115.122, 115.506, 115.538, 115.666, 115.762, 115.826, 115.826, 115.890, 116.274, 116.306,
+		116.434, 116.562, 116.626, 116.658, 117.010, 116.042, 116.074, 116.074, 116.170, 116.202, 116.234, 116.298), Array(
+		Custom String("dj"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("cybermonk"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj"), Custom String("dj"),
+		Custom String("dj"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("Provoxin"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
+		"cybermonk"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String("dj 2"),
+		Custom String("Protowalker"), Custom String("cybermonk")), Array(Custom String("cybermonk"), Custom String("cybermonk"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Protowalker"), Custom String("Provoxin"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
 		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("Protowalker")), Array(25, 15, 2.560, 7.680, 2.560, 7.680, 7.680, 2.080, Vector(
-		-0.256, 0, 0.967), 50, 2.880, 7.680, 2.560, 2.080, 2.880, 7.680, 2.880, 7.680, 2.880, 2.496, 2.880, 2.880, 3.072, 2.880, 9.216,
-		2.880, 9.216, 2.880, 2.496, 13.800, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 1.040, 5, 7.800, 7.200, 13.800,
-		3.750, 13.800, 11.500, 15, 25, 3.072, 9.216)), Array(Array(3, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 1, 1, 1, 1, 0, 1,
-		1, 1, 1, 0, 3, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0), Array(91.475, 91.475, 91.571, 91.635, 91.955,
-		91.955, 92.339, 92.723, 92.107, 92.491, 92.875, 93.259, 93.643, 93.027, 93.059, 93.251, 93.251, 93.411, 93.795, 94.179, 94.563,
-		94.691, 94.947, 94.331, 94.715, 95.099, 95.323, 96.075, 96.075, 96.171, 96.555, 96.939, 97.323, 97.707, 97.707, 97.803, 97.867,
-		97.963, 97.027, 97.091, 97.123, 97.187, 97.283, 97.347, 97.443, 97.475, 97.475, 97.475, 97.507, 97.603), Array(Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")), Array(Vector(0.687, 0, -0.727), 50,
-		2.880, 9.216, 2.496, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 13.800, 8, Vector(0.248, 0.389, 0.887),
-		2.880, 2.880, 2.880, 2.880, 13.800, 2.880, 2.880, 2.880, 1.040, 13.800, Vector(-0.907, 0.002, -0.422), 76.907, 2.880, 2.880,
-		2.880, 2.880, 2.880, 5, 5, 5, 5, 5, 2.880, 5, 5, 5, 5, 5, 9.600, Vector(0.835, -0.345, 0.429), 2.880, 5, 5)), Array(Array(0, 1,
-		1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1, 1, 3, 0, 1, 0, 1, 1, 0, 3, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0, 0, 1, 1, 1, 0,
-		1, 0, 1, 1, 1, 1), Array(97.667, 97.859, 98.243, 98.307, 98.403, 98.467, 98.563, 98.627, 98.627, 98.723, 98.755, 98.755,
-		99.011, 98.395, 98.619, 98.619, 98.779, 98.811, 99.163, 99.547, 99.675, 99.675, 99.899, 99.931, 99.283, 99.315, 99.667, 99.699,
-		99.955, 100.083, 100.467, 100.851, 100.235, 100.619, 101.003, 101.387, 101.771, 101.899, 101.899, 101.899, 101.155, 101.539,
-		101.923, 102.051, 102.307, 102.595, 102.595, 102.691, 102.075, 102.459), Array(Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk")), Array(Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2")),
-		Array(10, 2.880, 2.880, 10, 5, 5, 5, 2.880, 5, 5, Vector(-0.773, 0.002, -0.635), 30, 2.880, 2.880, Vector(-0.873, 0.000,
-		-0.488), 8, 2.880, 5, 2.880, 2.880, 8, Vector(0.178, -0.000, 0.984), 7.800, 2.880, 7.200, 2.880, 3.750, 2.880, 5, 2.880, 2.880,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, Vector(-0.115, -0.000, 0.993), 13.800, 9.600, 2.880, 2.880, 2.880, 13.800, 2.880, 15,
-		25, 2.880, 2.880, 2.880)), Array(Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0,
-		0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0, 1, 0, 0), Array(102.843, 103.227, 103.611, 103.995, 103.379, 103.763,
-		104.147, 104.531, 104.915, 104.298, 104.682, 105.066, 105.226, 105.226, 105.450, 105.610, 105.834, 105.218, 105.602, 105.986,
-		106.370, 106.754, 106.818, 106.138, 106.202, 106.202, 106.522, 106.586, 106.586, 106.650, 106.746, 106.810, 106.906, 106.906,
-		106.906, 106.970, 106.970, 107.066, 107.130, 107.226, 107.290, 107.290, 107.386, 107.386, 107.386, 107.418, 107.450, 107.674,
-		107.802, 107.930), Array(Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("Protowalker")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("Protowalker"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2")), Array(2.880, 2.880,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 9.600, Vector(-0.994, 0.001, 0.110), 2.880, 11.500,
-		2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.560, 2.880, 7.680, 13.800, 2.880, 7.680, 5, 5, 5, 5, 2.080, 2.880, 5, 5, 13.800, 5,
-		5, 5, 2.880, 5, 5, Vector(-0.918, 0.000, 0.397), 9.600, 2.560, 5, 2.880, 7.680, 5)), Array(Array(0, 1, 0, 0, 0, 0, 1, 0, 1, 1,
-		0, 1, 1, 1, 1, 3, 0, 0, 3, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 3, 0, 1, 1), Array(
-		107.026, 107.058, 107.090, 107.186, 107.186, 107.410, 107.442, 107.506, 107.826, 108.210, 108.274, 108.594, 108.978, 108.362,
-		108.746, 108.778, 108.778, 109.002, 109.002, 109.130, 109.514, 109.898, 109.282, 109.666, 109.666, 110.050, 110.050, 110.434,
-		110.434, 110.754, 110.786, 110.818, 110.202, 110.586, 110.970, 111.354, 111.738, 111.122, 111.506, 111.890, 112.274, 112.658,
-		112.818, 112.818, 112.042, 112.042, 112.266, 112.266, 112.426, 112.810), Array(Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String(
-		"ana"), Custom String("ana"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana"), Custom String("0"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk")), Array(Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String(
-		"ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2")), Array(5, 2.880, 5, 7.680, 10, 5, 2.880, 2.496,
-		2.880, 2.880, 18, 2.880, 2.880, 2.880, 2.880, Vector(-0.779, -0.299, 0.551), 8, 8, Vector(0.628, 0.301, -0.718), 2.880, 2.880,
-		2.880, 2.880, 2.880, 2.560, 2.880, 7.680, 2.880, 7.680, 2.080, 5, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880,
-		2.880, 2.880, 2.880, 8, Vector(0.775, 0, -0.632), 75, 2.880, Vector(-0.972, 0, 0.234), 9.600, 2.880, 2.880)), Array(Array(0, 1,
-		0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 1, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		0, 0, 0, 0, 0, 0), Array(113.130, 113.194, 113.514, 113.578, 113.770, 113.770, 113.770, 113.898, 113.218, 114.114, 114.498,
-		114.882, 114.202, 115.130, 115.130, 115.442, 115.442, 117.578, 117.026, 117.250, 117.250, 117.410, 117.794, 118.178, 118.562,
-		118.946, 118.330, 118.714, 118.906, 118.906, 119.098, 119.481, 119.865, 119.249, 119.633, 120.017, 120.401, 120.785, 120.169,
-		120.553, 120.937, 121.321, 121.705, 121.089, 123.065, 123.129, 123.705, 123.185, 123.249, 123.889), Array(Custom String("ana"),
-		Custom String("cybermonk"), Custom String("ana"), Custom String("cybermonk"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("0"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("ana 2")), Array(Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana"),
-		Custom String("ana"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana"), Custom String("ana"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker")), Array(2.560, 2.880, 7.680,
-		2.880, 15, 15, 25, 7.680, 2.080, 3.072, 9.216, 9.216, 2.496, 8, Vector(0.116, 0, -0.993), Vector(0.995, 0, -0.102), 9.600, 75,
-		2.880, 11.800, 11.800, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 2.880, 25, 1.440, 4.320, 4.320, 4.320, 4.320, 4.320, 4.320,
-		4.320, 4.320, 4.320, 4.320, 4.320, 4.320, 4.320, 0.267, 3.861, 7.882, 4.268, 4.302, 4.278, 3.072)), Array(Array(0, 0, 0, 0, 0,
-		3, 3, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0,
-		1, 2, 1), Array(124.145, 124.273, 124.657, 124.881, 124.977, 126.745, 126.745, 126.745, 126.745, 126.841, 127.225, 127.609,
-		127.993, 127.377, 127.537, 127.761, 127.857, 127.921, 128.017, 128.145, 128.177, 128.241, 128.337, 128.401, 128.497, 128.529,
-		128.561, 128.721, 128.817, 128.881, 128.913, 128.977, 128.041, 128.137, 128.201, 128.297, 128.297, 128.361, 128.457, 128.521,
-		128.681, 128.777, 129.065, 129.161, 129.449, 129.737, 129.801, 129.833, 129.897, 129.897), Array(Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk")), Array(
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String(
-		"cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("cybermonk"),
-		Custom String("cybermonk"), Custom String("ana 2"), Custom String("cybermonk"), Custom String("ana 2")), Array(13.800, 9.216,
-		9.216, 13.800, 2.496, Vector(-0.557, 0, -0.831), Vector(-0.339, 0, -0.941), 100, 86.592, 2.880, 2.880, 2.880, 2.880, 2.880, 5,
-		2.880, 5, 5, 5, 2.880, 5, 5, 5, 5, 10, 2.880, 10, 5, 10, 5, 2.880, 5, 5, 5, 5, 2.880, 10, 5, 5, 5, 2.880, 5, 2.880, 13.800,
-		2.880, 10, 10, 2.880, 1.497, 0.480)), Array(Array(0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0), Array(
-		129.897, 129.930, 129.985, 129.985, 130.338, 130.338, 131.194, 131.258, 131.354, 131.418, 131.514, 131.578, 131.674, 131.738,
-		131.834, 132.370, 132.754, 132.138, 132.459, 133.003, 133.003), Array(Custom String("Protowalker"), Custom String("cybermonk"),
-		Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"Protowalker"), Custom String("Protowalker")), Array(Custom String("cybermonk"), Custom String("Protowalker"), Custom String(
-		"Protowalker"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String(
-		"ana 2"), Custom String("ana 2"), Custom String("ana 2"), Custom String("Protowalker"), Custom String("Protowalker"),
-		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("ana 2"), Custom String("ana 2")), Array(1.497,
-		11.500, 15, 25, Vector(0.963, -0.001, -0.270), 30, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2.560, 7.680, 7.680, 2.080, 35.800, 35.800))));
+		"cybermonk"), Custom String("cybermonk"), Custom String("dj"), Custom String("dj"), Custom String("cybermonk"), Custom String(
+		"dj"), Custom String("dj"), Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String(
+		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("cybermonk"),
+		Custom String("dj 2"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("cybermonk"), Custom String(
+		"cybermonk"), Custom String("cybermonk"), Custom String("Protowalker")), Array(4, Vector(-0.869, -0.206, 0.450), 1.536, 70, 2,
+		3.750, 3.125, Vector(0.797, 0.123, 0.591), Vector(0.962, 0.268, 0.053), 2.160, 2.400, 1.590, 2.880, 1.536, 2.640, 2.880, 1.536,
+		0.325, 1.536, 1.536, 13.800, 2.640, 1.536, 2.880, 3.120, 1.536, 1.536, 35, 2.880, 2.880, 1.182, 1.536, 4, 6.250, Vector(0.880,
+		0.074, 0.468), 2.880, 2.880, 1.182, 1.536, 8.800, 8.800, 2.640, 5, 3.120, 5, 1.182, 5, 1.536, 5, 8.800), Array(0, 0, 3, 0, 1,
+		2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 3, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0,
+		0, 0, 0), Array(116.330, 116.394, 116.394, 116.394, 116.426, 116.490, 116.490, 116.490, 116.650, 116.842, 117.034, 117.418,
+		117.610, 117.802, 117.378, 117.410, 117.410, 117.570, 117.954, 118.146, 118.913, 118.681, 119.449, 119.705, 119.057, 119.121,
+		119.217, 119.345, 119.441, 119.505, 119.665, 119.761, 119.857, 119.857, 119.985, 120.657, 120.753, 120.945, 120.265, 120.361,
+		120.425, 120.521, 121.065, 121.225, 121.289, 121.321, 121.385, 121.481, 121.545, 121.705), Array(Custom String("Protowalker"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("Protowalker"), Custom String("cybermonk"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("dj"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj"),
+		Custom String("dj"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"Protowalker"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("Protowalker")), Array(Custom String(
+		"cybermonk"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("cybermonk"), Custom String("dj 2"),
+		Custom String("cybermonk"), Custom String("cybermonk"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"dj 2"), Custom String("Protowalker"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String(
+		"Provoxin"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("Protowalker"), Custom String("dj 2"), Custom String("Protowalker"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2")), Array(10, 4.800, Vector(0.558, -0.009, -0.830), 10, 2.640, 8.232, 8.232, 0.720, 2.880, 1.182, 2.880,
+		2.880, 1.182, 1.920, 1.182, 3.125, Vector(-0.442, -0.075, -0.894), 2.880, 0.245, 1.182, 1.182, 1.182, 1.182, 5, 4, 5, 1.182,
+		10, 5, 5, 10, 10, 6.250, Vector(0.108, 0.021, 0.994), 1.182, 2, 1.182, 0.080, 5, 5, 5, 1.182, 5, 5, 1.182, 5, 5, 5, 5, 5),
+		Array(1, 3, 0, 1, 0, 1, 2, 0), Array(121.057, 121.153, 121.153, 121.825, 122.177, 122.593, 122.721, 122.721), Array(
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin"), Custom String("dj 2"), Custom String("Provoxin"),
+		Custom String("dj 2"), Custom String("Provoxin"), Custom String("Provoxin")), Array(Custom String("dj 2"), Custom String(
+		"dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"), Custom String("dj 2"),
+		Custom String("dj 2")), Array(1.182, Vector(-0.405, 0.003, 0.914), 5, 1.182, 35, 1.182, 46.408, 46.408)));
 	Global.activeDataPieces = Array(True, True, True, True, False, True);
+	Global.round = 1;
+	Global.currentRound = 1;
 }

@@ -58,17 +58,7 @@ function parseInput() {
     var roundTimestamps = getVariableFromOpy(rule, "roundTimestamps");
   } catch (e) {
     createErrorAlert(e);
-  } // {
-  //  rounds:[] {   
-  //         events: {
-  //         damage: [],
-  //         healing: [],
-  //         finalBlows: [],
-  //         knockback: []
-  //     }
-  //    }
-  // }
-
+  }
 
   var rounds = [];
 
