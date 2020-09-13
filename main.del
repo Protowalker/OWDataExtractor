@@ -7,7 +7,7 @@ import "debug.del";
 //EVENTS
 globalvar define collectDamageEvents = WorkshopSettingToggle("Events", "Collect Damage Events", true);
 globalvar define collectHealingEvents = WorkshopSettingToggle("Events", "Collect Healing Events", true);
-globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", true);
+globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", false);
 globalvar define collectFinalBlowEvents = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
 
 
