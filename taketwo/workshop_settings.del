@@ -1,15 +1,15 @@
 //EVENTS
-globalvar define collectDamageEvents = WorkshopSettingToggle("Events", "Collect Damage Events", true);
-globalvar define collectHealingEvents = WorkshopSettingToggle("Events", "Collect Healing Events", true);
-globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", false);
-globalvar define collectFinalBlowEvents = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
+globalvar define collectDamageEvents! = WorkshopSettingToggle("Events", "Collect Damage Events", true);
+globalvar define collectHealingEvents! = WorkshopSettingToggle("Events", "Collect Healing Events", true);
+globalvar define collectKnockbackEvents! = WorkshopSettingToggle("Events", "Collect Knockback Events", false);
+globalvar define collectFinalBlowEvents! = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
 
 
 //DATA
-globalvar define collectIsAliveData = WorkshopSettingToggle("Data", "Collect \"Is Alive\" data", true);
-globalvar define collectPositionData = WorkshopSettingToggle("Data", "Collect Position data", true);
-globalvar define collectFacingData = WorkshopSettingToggle("Data", "Collect Facing Direction data", true);
-globalvar define collectAbilityData = WorkshopSettingToggle("Data", "Collect \"Active Ability\" data", true);
+globalvar define collectIsAliveData! = WorkshopSettingToggle("Data", "Collect \"Is Alive\" data", true);
+globalvar define collectPositionData! = WorkshopSettingToggle("Data", "Collect Position data", true);
+globalvar define collectFacingData! = WorkshopSettingToggle("Data", "Collect Facing Direction data", true);
+globalvar define collectAbilityData! = WorkshopSettingToggle("Data", "Collect \"Active Ability\" data", true);
 
-globalvar define collectHealthData = WorkshopSettingToggle("Data", "Collect Health data", true);
-globalvar define collectVelocityData = WorkshopSettingToggle("Data", "Collect Velocity data", false);
+globalvar define collectHealthData! = WorkshopSettingToggle("Data", "Collect Health data", true);
+globalvar define collectVelocityData! = WorkshopSettingToggle("Data", "Collect Velocity data", false);

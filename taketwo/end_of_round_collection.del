@@ -12,45 +12,134 @@ if(IsBetweenRounds() || IsMatchComplete()) {
 
 
     events_per_round[round] = [];
-    events_per_round[round][0] = [current_round_damage_timestamp_chunks, 
-                                  current_round_damage_attacker_chunks, 
-                                  current_round_damage_victim_chunks, 
-                                  current_round_damage_value_chunks];
 
-    events_per_round[round][1] = [current_round_healing_timestamp_chunks, 
-                                  current_round_healing_healer_chunks, 
-                                  current_round_healing_healee_chunks, 
-                                  current_round_healing_value_chunks];
-
-    events_per_round[round][2] = [current_round_final_blow_timestamp_chunks, 
-                                  current_round_final_blow_attacker_chunks, 
-                                  current_round_final_blow_victim_chunks, 
-                                  current_round_final_blow_value_chunks];
-
-    events_per_round[round][3] = [current_round_knockback_timestamp_chunks, 
-                                  current_round_knockback_attacker_chunks, 
-                                  current_round_knockback_victim_chunks, 
-                                  current_round_knockback_value_chunks];
-
-    current_round_damage_timestamp_chunks = [];
-    current_round_damage_attacker_chunks = [];
-    current_round_damage_victim_chunks = [];
-    current_round_damage_value_chunks = [];
-
-    current_round_healing_timestamp_chunks = [];
-    current_round_healing_healer_chunks = [];
-    current_round_healing_healee_chunks = [];
-    current_round_healing_value_chunks = [];
-
-    current_round_final_blow_timestamp_chunks = [];
-    current_round_final_blow_attacker_chunks = [];
-    current_round_final_blow_victim_chunks = [];
-    current_round_final_blow_value_chunks = [];
     
-    current_round_knockback_timestamp_chunks = [];
-    current_round_knockback_attacker_chunks = [];
-    current_round_knockback_victim_chunks = [];
-    current_round_knockback_value_chunks = [];
+    ///damage
+    define round_damage_timestamps = first_current_round_damage_timestamp_chunks;
+    round_damage_timestamps = Append(round_damage_timestamps, second_current_round_damage_timestamp_chunks);
+    round_damage_timestamps = Append(round_damage_timestamps, third_current_round_damage_timestamp_chunks);
+    round_damage_timestamps = Append(round_damage_timestamps, fourth_current_round_damage_timestamp_chunks);
+    round_damage_timestamps = Append(round_damage_timestamps, fifth_current_round_damage_timestamp_chunks);
+
+    define round_damage_attackers = first_current_round_damage_attacker_chunks;
+    round_damage_attackers = Append(round_damage_attackers, second_current_round_damage_attacker_chunks);
+    round_damage_attackers = Append(round_damage_attackers, third_current_round_damage_attacker_chunks);
+    round_damage_attackers = Append(round_damage_attackers, fourth_current_round_damage_attacker_chunks);
+    round_damage_attackers = Append(round_damage_attackers, fifth_current_round_damage_attacker_chunks);
+
+    define round_damage_victims = first_current_round_damage_victim_chunks;
+    round_damage_victims = Append(round_damage_victims, second_current_round_damage_victim_chunks);
+    round_damage_victims = Append(round_damage_victims, third_current_round_damage_victim_chunks);
+    round_damage_victims = Append(round_damage_victims, fourth_current_round_damage_victim_chunks);
+    round_damage_victims = Append(round_damage_victims, fifth_current_round_damage_victim_chunks);
+    
+    define round_damage_values = first_current_round_damage_value_chunks;
+    round_damage_values = Append(round_damage_values, second_current_round_damage_value_chunks);
+    round_damage_values = Append(round_damage_values, third_current_round_damage_value_chunks);
+    round_damage_values = Append(round_damage_values, fourth_current_round_damage_value_chunks);
+    round_damage_values = Append(round_damage_values, fifth_current_round_damage_value_chunks);
+    ///end damage
+
+
+    ///healing
+    define round_healing_timestamps = first_current_round_healing_timestamp_chunks;
+    round_healing_timestamps = Append(round_healing_timestamps, second_current_round_healing_timestamp_chunks);
+    round_healing_timestamps = Append(round_healing_timestamps, third_current_round_healing_timestamp_chunks);
+    round_healing_timestamps = Append(round_healing_timestamps, fourth_current_round_healing_timestamp_chunks);
+    round_healing_timestamps = Append(round_healing_timestamps, fifth_current_round_healing_timestamp_chunks);
+
+    define round_healing_healers = first_current_round_healing_healer_chunks;
+    round_healing_healers = Append(round_healing_healers, second_current_round_healing_healer_chunks);
+    round_healing_healers = Append(round_healing_healers, third_current_round_healing_healer_chunks);
+    round_healing_healers = Append(round_healing_healers, fourth_current_round_healing_healer_chunks);
+    round_healing_healers = Append(round_healing_healers, fifth_current_round_healing_healer_chunks);
+
+    define round_healing_healees = first_current_round_healing_healee_chunks;
+    round_healing_healees = Append(round_healing_healees, second_current_round_healing_healee_chunks);
+    round_healing_healees = Append(round_healing_healees, third_current_round_healing_healee_chunks);
+    round_healing_healees = Append(round_healing_healees, fourth_current_round_healing_healee_chunks);
+    round_healing_healees = Append(round_healing_healees, fifth_current_round_healing_healee_chunks);
+    
+    define round_healing_values = first_current_round_healing_value_chunks;
+    round_healing_values = Append(round_healing_values, second_current_round_healing_value_chunks);
+    round_healing_values = Append(round_healing_values, third_current_round_healing_value_chunks);
+    round_healing_values = Append(round_healing_values, fourth_current_round_healing_value_chunks);
+    round_healing_values = Append(round_healing_values, fifth_current_round_healing_value_chunks);
+    ///end healing
+
+    ///final_blow
+    define round_final_blow_timestamps = first_current_round_final_blow_timestamp_chunks;
+    round_final_blow_timestamps = Append(round_final_blow_timestamps, second_current_round_final_blow_timestamp_chunks);
+    round_final_blow_timestamps = Append(round_final_blow_timestamps, third_current_round_final_blow_timestamp_chunks);
+    round_final_blow_timestamps = Append(round_final_blow_timestamps, fourth_current_round_final_blow_timestamp_chunks);
+    round_final_blow_timestamps = Append(round_final_blow_timestamps, fifth_current_round_final_blow_timestamp_chunks);
+
+    define round_final_blow_attackers = first_current_round_final_blow_attacker_chunks;
+    round_final_blow_attackers = Append(round_final_blow_attackers, second_current_round_final_blow_attacker_chunks);
+    round_final_blow_attackers = Append(round_final_blow_attackers, third_current_round_final_blow_attacker_chunks);
+    round_final_blow_attackers = Append(round_final_blow_attackers, fourth_current_round_final_blow_attacker_chunks);
+    round_final_blow_attackers = Append(round_final_blow_attackers, fifth_current_round_final_blow_attacker_chunks);
+
+    define round_final_blow_victims = first_current_round_final_blow_victim_chunks;
+    round_final_blow_victims = Append(round_final_blow_victims, second_current_round_final_blow_victim_chunks);
+    round_final_blow_victims = Append(round_final_blow_victims, third_current_round_final_blow_victim_chunks);
+    round_final_blow_victims = Append(round_final_blow_victims, fourth_current_round_final_blow_victim_chunks);
+    round_final_blow_victims = Append(round_final_blow_victims, fifth_current_round_final_blow_victim_chunks);
+    
+    define round_final_blow_values = first_current_round_final_blow_value_chunks;
+    round_final_blow_values = Append(round_final_blow_values, second_current_round_final_blow_value_chunks);
+    round_final_blow_values = Append(round_final_blow_values, third_current_round_final_blow_value_chunks);
+    round_final_blow_values = Append(round_final_blow_values, fourth_current_round_final_blow_value_chunks);
+    round_final_blow_values = Append(round_final_blow_values, fifth_current_round_final_blow_value_chunks);
+    ///end final_blow
+
+    ///knockback
+    define round_knockback_timestamps = first_current_round_knockback_timestamp_chunks;
+    round_knockback_timestamps = Append(round_knockback_timestamps, second_current_round_knockback_timestamp_chunks);
+    round_knockback_timestamps = Append(round_knockback_timestamps, third_current_round_knockback_timestamp_chunks);
+    round_knockback_timestamps = Append(round_knockback_timestamps, fourth_current_round_knockback_timestamp_chunks);
+    round_knockback_timestamps = Append(round_knockback_timestamps, fifth_current_round_knockback_timestamp_chunks);
+
+    define round_knockback_attackers = first_current_round_knockback_attacker_chunks;
+    round_knockback_attackers = Append(round_knockback_attackers, second_current_round_knockback_attacker_chunks);
+    round_knockback_attackers = Append(round_knockback_attackers, third_current_round_knockback_attacker_chunks);
+    round_knockback_attackers = Append(round_knockback_attackers, fourth_current_round_knockback_attacker_chunks);
+    round_knockback_attackers = Append(round_knockback_attackers, fifth_current_round_knockback_attacker_chunks);
+
+    define round_knockback_victims = first_current_round_knockback_victim_chunks;
+    round_knockback_victims = Append(round_knockback_victims, second_current_round_knockback_victim_chunks);
+    round_knockback_victims = Append(round_knockback_victims, third_current_round_knockback_victim_chunks);
+    round_knockback_victims = Append(round_knockback_victims, fourth_current_round_knockback_victim_chunks);
+    round_knockback_victims = Append(round_knockback_victims, fifth_current_round_knockback_victim_chunks);
+    
+    define round_knockback_values = first_current_round_knockback_value_chunks;
+    round_knockback_values = Append(round_knockback_values, second_current_round_knockback_value_chunks);
+    round_knockback_values = Append(round_knockback_values, third_current_round_knockback_value_chunks);
+    round_knockback_values = Append(round_knockback_values, fourth_current_round_knockback_value_chunks);
+    round_knockback_values = Append(round_knockback_values, fifth_current_round_knockback_value_chunks);
+    ///end knockback
+    //#region
+    
+
+    events_per_round[round][0] = [round_damage_timestamps, 
+                                  round_damage_attackers,
+                                  round_damage_victims, 
+                                  round_damage_values];
+
+    events_per_round[round][1] = [round_healing_timestamps, 
+                                  round_healing_healers,
+                                  round_healing_healees, 
+                                  round_healing_values];
+
+    events_per_round[round][2] = [round_final_blow_timestamps, 
+                                  round_final_blow_attackers,
+                                  round_final_blow_victims, 
+                                  round_final_blow_values];
+
+    events_per_round[round][3] = [round_knockback_timestamps, 
+                                  round_knockback_attackers,
+                                  round_knockback_victims, 
+                                  round_knockback_values];
 
 
     damage_event_timestamps = [];
@@ -73,5 +162,107 @@ if(IsBetweenRounds() || IsMatchComplete()) {
     knockback_event_victims = [];
     knockback_event_values = [];
 
+    first_current_round_damage_timestamp_chunks = [];
+    first_current_round_damage_attacker_chunks = [];
+    first_current_round_damage_victim_chunks = [];
+    first_current_round_damage_value_chunks = [];
 
+    first_current_round_healing_timestamp_chunks = [];
+    first_current_round_healing_healer_chunks = [];
+    first_current_round_healing_healee_chunks = [];
+    first_current_round_healing_value_chunks = [];
+    
+    first_current_round_final_blow_timestamp_chunks = [];
+    first_current_round_final_blow_attacker_chunks = [];
+    first_current_round_final_blow_victim_chunks = [];
+    first_current_round_final_blow_value_chunks = [];
+
+    first_current_round_knockback_timestamp_chunks = [];
+    first_current_round_knockback_attacker_chunks = [];
+    first_current_round_knockback_victim_chunks = [];
+    first_current_round_knockback_value_chunks = [];
+
+    
+    second_current_round_damage_timestamp_chunks = [];
+    second_current_round_damage_attacker_chunks = [];
+    second_current_round_damage_victim_chunks = [];
+    second_current_round_damage_value_chunks = [];
+
+    second_current_round_healing_timestamp_chunks = [];
+    second_current_round_healing_healer_chunks = [];
+    second_current_round_healing_healee_chunks = [];
+    second_current_round_healing_value_chunks = [];
+    
+    second_current_round_final_blow_timestamp_chunks = [];
+    second_current_round_final_blow_attacker_chunks = [];
+    second_current_round_final_blow_victim_chunks = [];
+    second_current_round_final_blow_value_chunks = [];
+
+    second_current_round_knockback_timestamp_chunks = [];
+    second_current_round_knockback_attacker_chunks = [];
+    second_current_round_knockback_victim_chunks = [];
+    second_current_round_knockback_value_chunks = [];
+
+
+    third_current_round_damage_timestamp_chunks = [];
+    third_current_round_damage_attacker_chunks = [];
+    third_current_round_damage_victim_chunks = [];
+    third_current_round_damage_value_chunks = [];
+
+    third_current_round_healing_timestamp_chunks = [];
+    third_current_round_healing_healer_chunks = [];
+    third_current_round_healing_healee_chunks = [];
+    third_current_round_healing_value_chunks = [];
+    
+    third_current_round_final_blow_timestamp_chunks = [];
+    third_current_round_final_blow_attacker_chunks = [];
+    third_current_round_final_blow_victim_chunks = [];
+    third_current_round_final_blow_value_chunks = [];
+
+    third_current_round_knockback_timestamp_chunks = [];
+    third_current_round_knockback_attacker_chunks = [];
+    third_current_round_knockback_victim_chunks = [];
+    third_current_round_knockback_value_chunks = [];
+
+
+    fourth_current_round_damage_timestamp_chunks = [];
+    fourth_current_round_damage_attacker_chunks = [];
+    fourth_current_round_damage_victim_chunks = [];
+    fourth_current_round_damage_value_chunks = [];
+
+    fourth_current_round_healing_timestamp_chunks = [];
+    fourth_current_round_healing_healer_chunks = [];
+    fourth_current_round_healing_healee_chunks = [];
+    fourth_current_round_healing_value_chunks = [];
+
+    fourth_current_round_final_blow_timestamp_chunks = [];
+    fourth_current_round_final_blow_attacker_chunks = [];
+    fourth_current_round_final_blow_victim_chunks = [];
+    fourth_current_round_final_blow_value_chunks = [];
+
+    fourth_current_round_knockback_timestamp_chunks = [];
+    fourth_current_round_knockback_attacker_chunks = [];
+    fourth_current_round_knockback_victim_chunks = [];
+    fourth_current_round_knockback_value_chunks = [];
+
+
+    fifth_current_round_damage_timestamp_chunks = [];
+    fifth_current_round_damage_attacker_chunks = [];
+    fifth_current_round_damage_victim_chunks = [];
+    fifth_current_round_damage_value_chunks = [];
+
+    fifth_current_round_healing_timestamp_chunks = [];
+    fifth_current_round_healing_healer_chunks = [];
+    fifth_current_round_healing_healee_chunks = [];
+    fifth_current_round_healing_value_chunks = [];
+
+    fifth_current_round_final_blow_timestamp_chunks = [];
+    fifth_current_round_final_blow_attacker_chunks = [];
+    fifth_current_round_final_blow_victim_chunks = [];
+    fifth_current_round_final_blow_value_chunks = [];
+
+    fifth_current_round_knockback_timestamp_chunks = [];
+    fifth_current_round_knockback_attacker_chunks = [];
+    fifth_current_round_knockback_victim_chunks = [];
+    fifth_current_round_knockback_value_chunks = [];
 }

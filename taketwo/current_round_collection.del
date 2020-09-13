@@ -14,14 +14,53 @@ if(collectDamageEvents){
     ModifyVariable(damage_event_victims, Operation.AppendToArray, Victim);
     ModifyVariable(damage_event_values, Operation.AppendToArray, EventDamage);
 
-    if(CountOf(damage_event_timestamps) >= 50) {
-        ModifyVariable(current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
-        ModifyVariable(current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
-        ModifyVariable(current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
-        ModifyVariable(current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+    if(CountOf(damage_event_timestamps) >= 15) {
+        if(CountOf(first_current_round_damage_timestamp_chunks) <= 30){
+            ModifyVariable(first_current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+            MinWait();
+            ModifyVariable(first_current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+            MinWait();
+            ModifyVariable(first_current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+            MinWait();
+            ModifyVariable(first_current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+        } else if(CountOf(second_current_round_damage_timestamp_chunks) <= 30){
+            ModifyVariable(second_current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+            MinWait();
+            ModifyVariable(second_current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+            MinWait();
+            ModifyVariable(second_current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+            MinWait();
+            ModifyVariable(second_current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+        } else if(CountOf(third_current_round_damage_timestamp_chunks) <= 30){
+            ModifyVariable(third_current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+            MinWait();
+            ModifyVariable(third_current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+            MinWait();
+            ModifyVariable(third_current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+            MinWait();
+            ModifyVariable(third_current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+        } else if(CountOf(fourth_current_round_damage_timestamp_chunks) <= 30){
+            ModifyVariable(fourth_current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+            MinWait();
+            ModifyVariable(fourth_current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+            MinWait();
+            ModifyVariable(fourth_current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+            MinWait();
+            ModifyVariable(fourth_current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+        } else {
+            ModifyVariable(fifth_current_round_damage_timestamp_chunks, Operation.AppendToArray, [damage_event_timestamps]);
+            MinWait();
+            ModifyVariable(fifth_current_round_damage_attacker_chunks, Operation.AppendToArray, [damage_event_attackers]);
+            MinWait();
+            ModifyVariable(fifth_current_round_damage_victim_chunks, Operation.AppendToArray, [damage_event_victims]);
+            MinWait();
+            ModifyVariable(fifth_current_round_damage_value_chunks, Operation.AppendToArray, [damage_event_values]);
+        }
 
+        MinWait();
         damage_event_timestamps = [];
         damage_event_attackers = [];
+        MinWait();
         damage_event_victims = [];
         damage_event_values = [];
     }
@@ -31,16 +70,40 @@ rule: "Player Receives Healing"
 Event.OnHealingTaken 
 if(IsGameInProgress())
 if(collectHealingEvents){
-    ModifyVariable(damage_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
-    ModifyVariable(damage_event_attackers, Operation.AppendToArray, Healer);
-    ModifyVariable(damage_event_victims, Operation.AppendToArray, Healee);
-    ModifyVariable(damage_event_values, Operation.AppendToArray, EventHealing);
+    ModifyVariable(healing_event_timestamps, Operation.AppendToArray, PreciseTimestamp);
+    ModifyVariable(healing_event_healers, Operation.AppendToArray, Healer);
+    ModifyVariable(healing_event_healees, Operation.AppendToArray, Healee);
+    ModifyVariable(healing_event_values, Operation.AppendToArray, EventHealing);
 
-    if(CountOf(damage_event_timestamps) >= 50) {
-        ModifyVariable(current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
-        ModifyVariable(current_round_healing_healer_chunks, Operation.AppendToArray, [healing_event_healers]);
-        ModifyVariable(current_round_healing_healee_chunks, Operation.AppendToArray, [healing_event_healees]);
-        ModifyVariable(current_round_healing_value_chunks, Operation.AppendToArray, [healing_event_values]);
+    if(CountOf(healing_event_timestamps) >= 15) {
+        if(CountOf(first_current_round_healing_timestamp_chunks) <= 30){
+            ModifyVariable(first_current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+            ModifyVariable(first_current_round_healing_healer_chunks, Operation.AppendToArray,  [healing_event_healers]);
+            ModifyVariable(first_current_round_healing_healee_chunks, Operation.AppendToArray,    [healing_event_healees]);
+            ModifyVariable(first_current_round_healing_value_chunks, Operation.AppendToArray,     [healing_event_values]);
+        } else if(second_current_round_healing_timestamp_chunks <= 30){
+            ModifyVariable(second_current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+            ModifyVariable(second_current_round_healing_healer_chunks, Operation.AppendToArray,  [healing_event_healers]);
+            ModifyVariable(second_current_round_healing_healee_chunks, Operation.AppendToArray,    [healing_event_healees]);
+            ModifyVariable(second_current_round_healing_value_chunks, Operation.AppendToArray,     [healing_event_values]);
+        } else if(third_current_round_healing_timestamp_chunks <= 30){
+            ModifyVariable(third_current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+            ModifyVariable(third_current_round_healing_healer_chunks, Operation.AppendToArray,  [healing_event_healers]);
+            ModifyVariable(third_current_round_healing_healee_chunks, Operation.AppendToArray,    [healing_event_healees]);
+            ModifyVariable(third_current_round_healing_value_chunks, Operation.AppendToArray,     [healing_event_values]);
+        } else if(fourth_current_round_healing_timestamp_chunks <= 30){
+            ModifyVariable(fourth_current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+            ModifyVariable(fourth_current_round_healing_healer_chunks, Operation.AppendToArray,  [healing_event_healers]);
+            ModifyVariable(fourth_current_round_healing_healee_chunks, Operation.AppendToArray,    [healing_event_healees]);
+            ModifyVariable(fourth_current_round_healing_value_chunks, Operation.AppendToArray,     [healing_event_values]);
+        } else {
+            ModifyVariable(fifth_current_round_healing_timestamp_chunks, Operation.AppendToArray, [healing_event_timestamps]);
+            ModifyVariable(fifth_current_round_healing_healer_chunks, Operation.AppendToArray,  [healing_event_healers]);
+            ModifyVariable(fifth_current_round_healing_healee_chunks, Operation.AppendToArray,    [healing_event_healees]);
+            ModifyVariable(fifth_current_round_healing_value_chunks, Operation.AppendToArray,     [healing_event_values]);
+        }
+        MinWait();
+
 
         healing_event_timestamps = [];
         healing_event_healers = [];
@@ -58,17 +121,40 @@ if(collectFinalBlowEvents) {
     ModifyVariable(final_blow_event_victims, Operation.AppendToArray, Victim);
     ModifyVariable(final_blow_event_values, Operation.AppendToArray, EventDamage);
 
-    if(CountOf(final_blow_event_timestamps) >= 50) {
-        ModifyVariable(current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
-        ModifyVariable(current_round_final_blow_attacker_chunks, Operation.AppendToArray, [final_blow_event_attackers]);
-        ModifyVariable(current_round_final_blow_victim_chunks, Operation.AppendToArray, [final_blow_event_victims]);
-        ModifyVariable(current_round_final_blow_value_chunks, Operation.AppendToArray, [final_blow_event_values]);
-
+    if(CountOf(final_blow_event_timestamps) >= 15) {
+        if(CountOf(first_current_round_final_blow_timestamp_chunks) <= 30){
+            ModifyVariable(first_current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+            ModifyVariable(first_current_round_final_blow_attacker_chunks, Operation.AppendToArray,  [final_blow_event_attackers]);
+            ModifyVariable(first_current_round_final_blow_victim_chunks, Operation.AppendToArray,    [final_blow_event_victims]);
+            ModifyVariable(first_current_round_final_blow_value_chunks, Operation.AppendToArray,     [final_blow_event_values]);
+        } else if(second_current_round_final_blow_timestamp_chunks <= 30){
+            ModifyVariable(second_current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+            ModifyVariable(second_current_round_final_blow_attacker_chunks, Operation.AppendToArray,  [final_blow_event_attackers]);
+            ModifyVariable(second_current_round_final_blow_victim_chunks, Operation.AppendToArray,    [final_blow_event_victims]);
+            ModifyVariable(second_current_round_final_blow_value_chunks, Operation.AppendToArray,     [final_blow_event_values]);
+        } else if(third_current_round_final_blow_timestamp_chunks <= 30){
+            ModifyVariable(third_current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+            ModifyVariable(third_current_round_final_blow_attacker_chunks, Operation.AppendToArray,  [final_blow_event_attackers]);
+            ModifyVariable(third_current_round_final_blow_victim_chunks, Operation.AppendToArray,    [final_blow_event_victims]);
+            ModifyVariable(third_current_round_final_blow_value_chunks, Operation.AppendToArray,     [final_blow_event_values]);
+        } else if(fourth_current_round_final_blow_timestamp_chunks <= 30){
+            ModifyVariable(fourth_current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+            ModifyVariable(fourth_current_round_final_blow_attacker_chunks, Operation.AppendToArray,  [final_blow_event_attackers]);
+            ModifyVariable(fourth_current_round_final_blow_victim_chunks, Operation.AppendToArray,    [final_blow_event_victims]);
+            ModifyVariable(fourth_current_round_final_blow_value_chunks, Operation.AppendToArray,     [final_blow_event_values]);
+        } else {
+            ModifyVariable(fifth_current_round_final_blow_timestamp_chunks, Operation.AppendToArray, [final_blow_event_timestamps]);
+            ModifyVariable(fifth_current_round_final_blow_attacker_chunks, Operation.AppendToArray,  [final_blow_event_attackers]);
+            ModifyVariable(fifth_current_round_final_blow_victim_chunks, Operation.AppendToArray,    [final_blow_event_victims]);
+            ModifyVariable(fifth_current_round_final_blow_value_chunks, Operation.AppendToArray,     [final_blow_event_values]);
+        }
+        MinWait();
         final_blow_event_timestamps = [];
         final_blow_event_attackers = [];
         final_blow_event_victims = [];
         final_blow_event_values = [];
     }
+    
 }
 
 rule: "Player Takes Knockback"
@@ -81,11 +167,34 @@ if(collectKnockbackEvents)
     ModifyVariable(knockback_event_victims, Operation.AppendToArray, Victim);
     ModifyVariable(knockback_event_values, Operation.AppendToArray, EventDamage);
 
-    if(CountOf(damage_event_timestamps) >= 50) {
-        ModifyVariable(current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
-        ModifyVariable(current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
-        ModifyVariable(current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
-        ModifyVariable(current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+    if(CountOf(knockback_event_timestamps) >= 15) {
+        if(CountOf(first_current_round_knockback_timestamp_chunks) <= 30){
+            ModifyVariable(first_current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+            ModifyVariable(first_current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+            ModifyVariable(first_current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+            ModifyVariable(first_current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+        } else if(second_current_round_knockback_timestamp_chunks <= 30){
+            ModifyVariable(second_current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+            ModifyVariable(second_current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+            ModifyVariable(second_current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+            ModifyVariable(second_current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+        } else if(third_current_round_knockback_timestamp_chunks <= 30){
+            ModifyVariable(third_current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+            ModifyVariable(third_current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+            ModifyVariable(third_current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+            ModifyVariable(third_current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+        } else if(fourth_current_round_knockback_timestamp_chunks <= 30){
+            ModifyVariable(fourth_current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+            ModifyVariable(fourth_current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+            ModifyVariable(fourth_current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+            ModifyVariable(fourth_current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+        } else {
+            ModifyVariable(fifth_current_round_knockback_timestamp_chunks, Operation.AppendToArray, [knockback_event_timestamps]);
+            ModifyVariable(fifth_current_round_knockback_attacker_chunks, Operation.AppendToArray,  [knockback_event_attackers]);
+            ModifyVariable(fifth_current_round_knockback_victim_chunks, Operation.AppendToArray,    [knockback_event_victims]);
+            ModifyVariable(fifth_current_round_knockback_value_chunks, Operation.AppendToArray,     [knockback_event_values]);
+        }
+        MinWait();
 
         knockback_event_timestamps = [];
         knockback_event_attackers = [];

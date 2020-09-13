@@ -7,11 +7,11 @@ define PreciseTimestamp: TotalTimeElapsed() + Millis;
 rule: "Setup"
 {
     ChaseVariableAtRate(timer, 999999999, 1, RateChaseReevaluation.DestinationAndRate);
-    DisableInspectorRecording();
+    //DisableInspectorRecording();
 }
 
 
-globalvar define round_timestamps = [];
+globalvar define round_timestamps! = [];
 
 rule: "Get timestamps for rounds"
 Event.OngoingGlobal
