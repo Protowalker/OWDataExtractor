@@ -7,7 +7,7 @@ import "debug.del";
 //EVENTS
 globalvar define collectDamageEvents = WorkshopSettingToggle("Events", "Collect Damage Events", true);
 globalvar define collectHealingEvents = WorkshopSettingToggle("Events", "Collect Healing Events", true);
-globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", false);
+//globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", true);
 globalvar define collectFinalBlowEvents = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
 
 
@@ -57,10 +57,6 @@ rule: "Setup"
 {
     ChaseVariableAtRate(timer, 999999999, 1, RateChaseReevaluation.DestinationAndRate);
     DisableInspectorRecording();
-    CRE_type[0] = [];
-    CRE_aName[0] = [];
-    CRE_vName[0] = [];
-    CRE_value[0] = [];
 }
 
 
@@ -112,15 +108,15 @@ if(collectFinalBlowEvents) {
     AppendToEvents(EventType.FinalBlow, Attacker(), Victim(), EventDamage());
 }
 
-rule: "Player Takes Knockback"
-Event.PlayerDealtKnockback
-if(IsGameInProgress())
-if(collectKnockbackEvents)
- {
-    //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
-    //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
-    AppendToEvents(EventType.Knockback, Attacker(), Victim(), EventDirection());
-}
+// rule: "Player Takes Knockback"
+// Event.PlayerDealtKnockback
+// if(IsGameInProgress())
+// if(collectKnockbackEvents)
+//  {
+//     //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
+//     //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
+//     AppendToEvents(EventType.Knockback, Attacker(), Victim(), EventDirection());
+// }
 
 rule: "Get data once every 5 seconds otherwise"
 Event.OngoingPlayer
@@ -182,6 +178,8 @@ globalvar define activeDataPieces = [];
 rule: "Round complete, store final data"
 if(IsBetweenRounds() ||IsMatchComplete()){
     define round = MatchRound() - 1;
+    if(events[round] == 0) events[round] = [];
+
     events[round] = Append(events[round], [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
 
     foreach(define player in AllPlayers()){
@@ -191,6 +189,7 @@ if(IsBetweenRounds() ||IsMatchComplete()){
         }
             
         ModifyVariable(data[currentRound][GlobalPlayerSlot(player)], Operation.AppendToArray, player.currentRoundData);
+        MinWait();
         player.currentRoundData = [];
         player.dataIndex = 0;
     }

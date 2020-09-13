@@ -66,7 +66,10 @@ function parseInput() {
             }
         };
 
-        for (var j = 0; j < events[i].length; j += 7) {
+
+
+
+        for (var j = 0; j < events[i].length; j += 5) {
             for (var k = 0; k < events[i][j].length; k++) {
                 let type = events[i][j][k];
                 let timestamp = events[i][j + 1][k];
@@ -148,7 +151,7 @@ function getVariableFromOpy(script, variableName) {
     var dataJson = '{"' + variableName + '": ' + dataArray + '}';
     var dataJson = dataJson.replace(vectRegex, '[$<entries>]');
 
-    console.log(dataJson);
+    console.log(JSON.parse(dataJson));
 
     return JSON.parse(dataJson)[variableName];
 }
