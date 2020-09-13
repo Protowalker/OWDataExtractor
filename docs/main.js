@@ -31,13 +31,20 @@ function parseInput() {
     let ruleStart = overpy_output.indexOf("rule");
     let rule = overpy_output.slice(ruleStart)
 
+    let data;
+    let events;
+
+    let activeDataPieces;
+    let roundTimestamps;
+    let playerNames;
+
     try {
+        data = getVariableFromOpy(rule, "data");
+        events = getVariableFromOpy(rule, "events");
 
-        var data = getVariableFromOpy(rule, "data");
-        var events = getVariableFromOpy(rule, "events");
-
-        var activeDataPieces = getVariableFromOpy(rule, "activeDataPieces");
-        var roundTimestamps = getVariableFromOpy(rule, "roundTimestamps");
+        activeDataPieces = getVariableFromOpy(rule, "activeDataPieces");
+        roundTimestamps = getVariableFromOpy(rule, "roundTimestamps");
+        playerNames = getVariableFromOpy(rule, "playerNames");
     } catch (e) {
         createErrorAlert(e);
     }
@@ -113,7 +120,42 @@ function parseInput() {
 
     //parse data
     for (let i = 0; i < data.length; i++) {
-        console.log(data[i]);
+        rounds[i].data = {
+            players: {}
+        };
+
+        for (let j = 0; j < playerNames.length; j++) {
+            rounds[i].data.players[playerNames[j]] = [];
+
+            for (let k = 0; k < data[i][j].length; k++) {
+                let currentData = data[i][j][k];
+                let dataPiece = {};
+
+                dataPiece["timestamp"] = currentData[0];
+                if (activeDataPieces[0]) dataPiece["alive"] = currentData[1];
+                if (activeDataPieces[1]) dataPiece["position"] = currentData[2];
+                if (activeDataPieces[2]) dataPiece["direction_xyz"] = currentData[3];
+                if (activeDataPieces[3]) dataPiece["health"] = currentData[4];
+                if (activeDataPieces[4]) dataPiece["velocity"] = currentData[5];
+
+                if (activeDataPieces[5]) {
+                    //ABILITIES
+                    let flags = currentData[6];
+                    let abilityFlags = {
+                        ability1: flags & 1,
+                        ability2: flags & 2,
+                        primaryFire: flags & 4,
+                        secondaryFire: flags & 8,
+                        melee: flags & 16,
+                        ultimate: flags & 32
+                    };
+                    dataPiece["abilityFlags"] = abilityFlags;
+                }
+
+                rounds[i].data.players[playerNames[j]].push(dataPiece);
+            }
+        }
+
     }
 
 
