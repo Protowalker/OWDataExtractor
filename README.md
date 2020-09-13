@@ -16,15 +16,20 @@ I use overpy's decompiler to extract the data. Without it this project would hav
 ![inspector](docs/images/inspector.png)  
 
 2. Wait for this list to fill up with the names of all the players:  
-Bad:  ![list_not_full](docs/images/list_not_full.png)  
-Good: ![list_not_full](docs/images/list_full.png)  
+Bad:  
+![list_not_full](docs/images/list_not_full.png)  
+Good:  
+![list_not_full](docs/images/list_full.png)  
 
 3. Click on the button labeled `(x)`  
 ![variable_button](docs/images/variable_button.png)
 
 4. Go to [the website](https://protowalker.github.io/OWDataExtractor) and paste into the box labeled "Input data from Overwatch.."
 
-The data will be parsed into nice JSON for you to read down below.
+The data will be parsed into nice JSON for you to read in the bottom box.
+
+### Hey!
+Is this data from a tournament or PUG? Consider making a pull request to https://github.com/Protowalker/OWDataExtractor_Dataset with your data. We're trying to compile a dataset for use in statistics and the creation of training modes -- maybe even, with enough data, an AI!
 
 -------------
 
