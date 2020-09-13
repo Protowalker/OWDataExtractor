@@ -45,6 +45,7 @@ function parseInput() {
 
     let rounds = [];
 
+    //parse events
     for (var i = 0; i < events.length; i++) {
         let roundOutput = {
             events: {
@@ -110,6 +111,12 @@ function parseInput() {
         rounds.push(roundOutput);
     }
 
+    //parse data
+    for (let i = 0; i < data.length; i++) {
+        console.log(data[i]);
+    }
+
+
     let output = {};
 
     output.rounds = rounds;
@@ -140,6 +147,7 @@ function getVariableFromOpy(script, variableName) {
     var dataJson = '{"' + variableName + '": ' + dataArray + '}';
     var dataJson = dataJson.replace(vectRegex, '[$<entries>]');
 
+    console.log("[getVariableFromOpy]");
     console.log(JSON.parse(dataJson));
 
     return JSON.parse(dataJson)[variableName];

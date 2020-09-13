@@ -173,6 +173,8 @@ void AppendToData(define player, define value){
 globalvar define data = [];
 globalvar define events = [];
 
+globalvar define playerNames = [];
+
 globalvar define activeDataPieces = [];
 
 rule: "Round complete, store final data"
@@ -187,8 +189,11 @@ if(IsBetweenRounds() ||IsMatchComplete()){
         if(data[currentRound] == 0) {
             data[currentRound] = [];
         }
+
+        define playerSlot = GlobalPlayerSlot(player);
+        if(data[currentRound][playerSlot] == 0) data[currentRound][playerSlot] = [];
             
-        ModifyVariable(data[currentRound][GlobalPlayerSlot(player)], Operation.AppendToArray, player.currentRoundData);
+        ModifyVariable(data[currentRound][playerSlot], Operation.AppendToArray, player.currentRoundData);
         MinWait();
         player.currentRoundData = [];
         player.dataIndex = 0;
