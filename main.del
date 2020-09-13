@@ -165,7 +165,7 @@ void AppendToData(define player, define value){
             data[currentRound] = [];
         }
         
-        data[currentRound][GlobalPlayerSlot(player)][CountOf(data[currentRound][GlobalPlayerSlot(player)])] = player.currentRoundData;
+        ModifyVariable(data[currentRound][GlobalPlayerSlot(player)], Operation.AppendToArray, player.currentRoundData);
         player.currentRoundData = [];
         player.dataIndex = 0;
     }
@@ -184,6 +184,17 @@ if(IsBetweenRounds() ||IsMatchComplete()){
     define round = MatchRound() - 1;
     events[round] = Append(events[round], [CRE_type, CRE_timestamp, MappedArray(CRE_aName, Name(ArrayElement())), MappedArray(CRE_vName, Name(ArrayElement())), CRE_value]);
 
+    foreach(define player in AllPlayers()){
+        define currentRound = MatchRound() - 1;
+        if(data[currentRound] == 0) {
+            data[currentRound] = [];
+        }
+            
+        ModifyVariable(data[currentRound][GlobalPlayerSlot(player)], Operation.AppendToArray, player.currentRoundData);
+        player.currentRoundData = [];
+        player.dataIndex = 0;
+    }
+    
     CRE_timestamp = [];
     CRE_type = [];
     CRE_aName = [];
