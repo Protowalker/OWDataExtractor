@@ -7,7 +7,7 @@ import "debug.del";
 //EVENTS
 globalvar define collectDamageEvents = WorkshopSettingToggle("Events", "Collect Damage Events", true);
 globalvar define collectHealingEvents = WorkshopSettingToggle("Events", "Collect Healing Events", true);
-//globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", true);
+globalvar define collectKnockbackEvents = WorkshopSettingToggle("Events", "Collect Knockback Events", true);
 globalvar define collectFinalBlowEvents = WorkshopSettingToggle("Events", "Collect Final Blow Events", true);
 
 
@@ -108,15 +108,15 @@ if(collectFinalBlowEvents) {
     AppendToEvents(EventType.FinalBlow, Attacker(), Victim(), EventDamage());
 }
 
-// rule: "Player Takes Knockback"
-// Event.PlayerDealtKnockback
-// if(IsGameInProgress())
-// if(collectKnockbackEvents)
-//  {
-//     //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
-//     //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
-//     AppendToEvents(EventType.Knockback, Attacker(), Victim(), EventDirection());
-// }
+rule: "Player Takes Knockback"
+Event.PlayerDealtKnockback
+if(IsGameInProgress())
+if(collectKnockbackEvents)
+ {
+    //Attacker().currentRoundData = Append(currentRoundData, getPlayerData(Attacker())); 
+    //Victim().currentRoundData = Append(currentRoundData, getPlayerData(Victim())); 
+    AppendToEvents(EventType.Knockback, Attacker(), Victim(), EventDirection());
+}
 
 rule: "Get data once every 5 seconds otherwise"
 Event.OngoingPlayer
